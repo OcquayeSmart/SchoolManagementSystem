@@ -3,12 +3,12 @@ import java.util.ArrayList;
 public class Classes{
     private String classID;
     //enums are automatically public static final
-    private ClassLevel classLevel;
-    private static ArrayList<String> list;
+    private final ClassLevel classLevel;
+    private final ArrayList<Student> listOfStudents;
 
-    Classes(String ClassID, ClassLevel level){
+    Classes(String ClassID, ClassLevel level, ArrayList<Student> listOfStudents){
         String classID;
-        list = new ArrayList<>();
+        this.listOfStudents = listOfStudents;
         this.classLevel = level;
     }
     //getters
@@ -18,15 +18,15 @@ public class Classes{
     public ClassLevel getClassLevel(){
         return this.classLevel;
     }
-    public ArrayList<String> getList(){
-        return list;
+    public ArrayList<Student> getList(){
+        return this.listOfStudents;
     }
 
     //setters
     public void setClassID(String classID){
         this.classID = classID;
     }
-    public void setList(ArrayList<String> list){
-        list = new ArrayList<>();
+    public void setList(ArrayList<Student> listOfStudents){
+        listOfStudents = new ArrayList<>();
     }
 }
