@@ -1,18 +1,17 @@
 import java.util.ArrayList;
 
-public class Course extends Person{
+public class Course{
     private String code;
     private String title;
     private Teacher teacher;
-    private ArrayList<String> enrolledStudents;
+    private Student enrolledStudents;
     private int creditUnits;
 
-    Course(int id, String firstName, String lastName, String DateOfBirth, String ClassID, Classes desiredClassLevel, String code, String title, Teacher teacher,  int creditUnits) {
-        super(id, firstName, lastName, DateOfBirth);
+    Course(String ClassID, Classes desiredClassLevel, String code, String title, Teacher teacher,  int creditUnits, Student enrolledStudents) {
         this.code = code;
         this.title = title;
         this.teacher = teacher;
-        enrolledStudents = new ArrayList<>();
+        this.enrolledStudents = enrolledStudents;
         this.creditUnits = creditUnits;
     }
 //getters have been understood quite well
@@ -28,8 +27,8 @@ public class Course extends Person{
     public Teacher getTeacher(){
         return this.teacher;
     }
-    public ArrayList<String> getEnrolledStudents(){
-        return enrolledStudents;
+    public Student getEnrolledStudents(){
+        return this.enrolledStudents;
     }
 //now it is left with setters for me to crack
     public void setCode(String code){
@@ -41,7 +40,7 @@ public class Course extends Person{
     public void setTeacher(Teacher teacher){
         this.teacher = teacher;
     }
-    public void setEnrolledStudents(ArrayList<String> enrolledStudents){
+    public void setEnrolledStudents(Student enrolledStudents){
         this.enrolledStudents = enrolledStudents;
     }
     public void setCreditUnits(int creditUnits){

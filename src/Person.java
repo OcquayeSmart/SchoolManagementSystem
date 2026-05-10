@@ -2,13 +2,13 @@ public abstract class Person {
     private int id;
     private String firstName;
     private String lastName;
-    private String DateOfBirth;
+    private String dateOfBirth;
 
     Person(int id, String firstName, String lastName, String DateOfBirth){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.DateOfBirth = DateOfBirth;
+        this.dateOfBirth = DateOfBirth;
     }
     //getters done
     public int getID(){
@@ -21,7 +21,7 @@ public abstract class Person {
         return this.lastName;
     }
     public String getDateOfBirth(){
-        return DateOfBirth;
+        return dateOfBirth;
     }
     //setters done
     public void setID(int id){
@@ -34,6 +34,6 @@ public abstract class Person {
         this.lastName = lastName;
     }
     public void setDateOfBirth(String DateOfBirth){
-        this.DateOfBirth = DateOfBirth;
+        this.dateOfBirth = DateOfBirth;
     }
 }

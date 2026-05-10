@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class Classes extends Person{
+public class Classes{
     private String classID;
-    private final ClassLevel classLevel;
+    //enums are automatically public static final
+    private ClassLevel classLevel;
     private static ArrayList<String> list;
 
-    Classes(int id, String firstName, String lastName, String DateOfBirth, String ClassID, ClassLevel level){
-        super(id, firstName, lastName, DateOfBirth);
+    Classes(String ClassID, ClassLevel level){
         String classID;
         list = new ArrayList<>();
         this.classLevel = level;

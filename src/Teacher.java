@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Teacher extends Person{
     private String teacherId;
-    static private ArrayList<String> listOfCourses;
+    private ArrayList<String> listOfCourses;
 
     Teacher(int id, String firstName, String lastName, String DateOfBirth, String teacherId) {
         super(id, firstName, lastName, DateOfBirth);
@@ -20,7 +20,5 @@ public class Teacher extends Person{
     public void setTeacherId(String teacherId){
         this.teacherId = teacherId;
     }
-    public void setListOfCourses(ArrayList<String> listOfCourses){
-        Teacher.listOfCourses = listOfCourses;
-    }
+
 }
