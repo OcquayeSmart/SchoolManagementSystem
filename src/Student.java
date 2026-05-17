@@ -1,31 +1,32 @@
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Student extends Person{
     private final UUID studentID;
-    private Course enrolledCourses;
-    private Classes studentClass;
+    ArrayList<Course> enrolledCourses;
+    private Classes ClassLevel;
 
-    Student(int id, String firstName, String lastName, String DateOfBirth, Course enrolledCourses, Classes studentClass){
+    Student(int id, String firstName, String lastName, String DateOfBirth, ArrayList<Course> enrolledCourses, Classes ClassLevel){
         super(id, firstName, lastName, DateOfBirth);
         studentID = UUID.randomUUID();
         this.enrolledCourses = enrolledCourses;
-        this.studentClass = studentClass;
+        this.ClassLevel = ClassLevel;
     }
     //getters done here as well
     public UUID getStudentID(){
         return this.studentID;
     }
-    public Course getEnrolledCourses(){
+    public ArrayList<Course> getEnrolledCourses(){
         return this.enrolledCourses;
     }
-    public Classes getStudentClass(){
-        return this.studentClass;
+    public Classes getClassLevel(){
+        return this.ClassLevel;
     }
     //setters here also complete// this is kinda repetitive
-    public void setEnrolledCourses(Course enrolledCourses){
+    public void setEnrolledCourses(ArrayList<Course> enrolledCourses){
         this.enrolledCourses = enrolledCourses;
     }
-    public void setStudentClass(Classes studentClass){
-        this.studentClass = studentClass;
+    public void setClassLevel(Classes studentClass){
+        this.ClassLevel = ClassLevel;
     }
 }

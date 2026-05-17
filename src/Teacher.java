@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Teacher extends Person{
     private String teacherId;
-    private ArrayList<String> listOfCourses;
+    private final ArrayList<Course> listOfCourses;
 
     Teacher(int id, String firstName, String lastName, String DateOfBirth, String teacherId) {
         super(id, firstName, lastName, DateOfBirth);

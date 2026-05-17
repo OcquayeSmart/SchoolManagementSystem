@@ -26,7 +26,7 @@ public class Classes{
     public void setClassID(String classID){
         this.classID = classID;
     }
-    public void setList(ArrayList<Student> listOfStudents){
+    public void setlistOfStudents(ArrayList<Student> listOfStudents){
         listOfStudents = new ArrayList<>();
     }
 }
