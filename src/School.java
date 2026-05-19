@@ -18,6 +18,26 @@ public class School {
         this.listOfCourses = listOfCourses;
     }
 
+    //creating my unique methods here
+    public void receiveApplication(Applicant applicant){
+        System.out.println("Application received");
+    }
+    public void reviewApplication(Applicant applicant){
+        if(Double.isNaN(applicant.getPreviousGPA())){
+            System.out.println("Application pending");
+        }
+        //using the 4.0 GPA scale
+        else if(applicant.getPreviousGPA() > 2.0){
+            System.out.println("Application accepted");
+        }else if(applicant.getPreviousGPA() < 2.0){
+            System.out.println("Application rejected");
+        }
+        else{
+            System.out.println(applicant.getPreviousGPA() + " is incorrect");
+        }
+    }
+
+
     public String getName(){
         return this.name;
     }
