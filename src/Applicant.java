@@ -8,13 +8,15 @@ public class Applicant extends Person{
     private double previousGPA;
     private LocalDate applicationDate;
     boolean submitApplication = true;
+    private ApplicationStatus Status;
 
-    Applicant(int id, String firstName, String lastName, String DateOfBirth, String previousSchool, double previousGPA, LocalDate applicationDate, ClassLevel DesiredClassLevel){
+    Applicant(int id, String firstName, String lastName, String DateOfBirth, String previousSchool, double previousGPA, LocalDate applicationDate, ClassLevel DesiredClassLevel, ApplicationStatus Status){
         super(id, firstName, lastName, DateOfBirth);
         this.previousSchool = previousSchool;
         this.previousGPA = previousGPA;
         applicationDate = LocalDate.now();
-        this.desiredClassLevel = desiredClassLevel;
+
+
     }
 
     //methods created here
@@ -26,21 +28,20 @@ public class Applicant extends Person{
                 desiredClassLevel = ClassLevel.valueOf(userInput);
             }
             catch(IllegalArgumentException e){
-                System.out.println("*Try again*, you entered the wrong class level");
+                System.out.println("*Try again* you entered the wrong class level");
                 System.out.println("Enter your desiredClassLevel: ");
+                String userInput = scanner.nextLine().toLowerCase();
+                desiredClassLevel = ClassLevel.valueOf(userInput);
             }
             System.out.println("Previous School: ");
             previousSchool = scanner.nextLine();
             System.out.println("Previous GPA: ");
             previousGPA = scanner.nextDouble();
             System.out.println("submitting application... ");
+            System.out.println("Application submitted at " + LocalDate.now());
             submitApplication = false;
         }
     }
-    public void applicationStatus(){
-
-    }
-
     //getters
     public String getPreviousSchool(){
         return this.previousSchool;
@@ -54,6 +55,9 @@ public class Applicant extends Person{
     public LocalDate getApplicationDate(){
         return applicationDate;
     }
+    public ApplicationStatus getApplicationStatus(){
+        return this.Status;
+    }
     //setters
     public void setPreviousSchool(String previousSchool){
         this.previousSchool = previousSchool;
@@ -66,6 +70,9 @@ public class Applicant extends Person{
     }
     public void setDesiredClassLevel(ClassLevel desiredClassLevel){
         this.desiredClassLevel = desiredClassLevel;
+    }
+    public void setApplicationStatus(){
+        this.Status = Status;
     }
 
 }
