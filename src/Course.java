@@ -14,7 +14,6 @@ public class Course{
         this.enrolledStudents = enrolledStudents;
         this.creditUnits = creditUnits;
     }
-//getters have been understood quite well
     public String getCode(){
         return this.code;
     }
@@ -30,7 +29,6 @@ public class Course{
     public Student getEnrolledStudents(){
         return this.enrolledStudents;
     }
-//now it is left with setters for me to crack
     public void setCode(String code){
         this.code = code;
     }

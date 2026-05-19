@@ -10,7 +10,6 @@ public abstract class Person {
         this.lastName = lastName;
         this.dateOfBirth = DateOfBirth;
     }
-    //getters done
     public int getID(){
         return this.id;
     }
@@ -23,7 +22,6 @@ public abstract class Person {
     public String getDateOfBirth(){
         return dateOfBirth;
     }
-    //setters done
     public void setID(int id){
         this.id = id;
     }
