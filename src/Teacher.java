@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Teacher extends Person{
     private String teacherId;
-    private final ArrayList<Course> listOfCourses;
+    private ArrayList<Course> listOfCourses;
 
     Teacher(int id, String firstName, String lastName, String DateOfBirth, String teacherId) {
         super(id, firstName, lastName, DateOfBirth);
@@ -13,7 +13,7 @@ public class Teacher extends Person{
     public String getTeacherId(String teacherId){
         return teacherId;
     }
-    public ArrayList<String> listOfCourses(ArrayList<String> listOfCourses){
+    public ArrayList<Course> listOfCourses(ArrayList<Course> listOfCourses){
         return listOfCourses;
     }
     //setters done here

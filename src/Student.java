@@ -3,7 +3,7 @@ import java.util.UUID;
 
 public class Student extends Person{
     private final UUID studentID;
-    ArrayList<Course> enrolledCourses;
+    private ArrayList<Course> enrolledCourses;
     private Classes ClassLevel;
 
     Student(int id, String firstName, String lastName, String DateOfBirth, ArrayList<Course> enrolledCourses, Classes ClassLevel){
@@ -26,7 +26,6 @@ public class Student extends Person{
     public void setEnrolledCourses(ArrayList<Course> enrolledCourses){
         this.enrolledCourses = enrolledCourses;
     }
-    public void setClassLevel(Classes studentClass){
-        this.ClassLevel = ClassLevel;
+    public Classes setClassLevel(Classes studentClass){return this.ClassLevel;
     }
 }
