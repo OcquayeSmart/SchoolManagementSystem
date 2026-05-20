@@ -1,21 +1,19 @@
 import java.util.ArrayList;
-
 public class School {
     private final String name;
     private final String address;
-    private ArrayList<Student> listOfStudents;
-    private ArrayList<Classes> listOfClasses;
-    private ArrayList<Teacher> listOfTeachers;
-    private ArrayList<Course> listOfCourses;
-
+    private final ArrayList<Student> listOfStudents;
+    private final ArrayList<Classes> listOfClasses;
+    private final ArrayList<Teacher> listOfTeachers;
+    private final ArrayList<Course> listOfCourses;
 
     public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<Teacher> listOfTeachers, ArrayList<Course> listOfCourses) {
         this.name = name;
         this.address = address;
-        this.listOfStudents = listOfStudents;
-        this.listOfClasses = listOfClasses;
-        this.listOfTeachers = listOfTeachers;
-        this.listOfCourses = listOfCourses;
+        this.listOfStudents = new ArrayList<>();
+        this.listOfClasses = new ArrayList<>();
+        this.listOfTeachers = new ArrayList<>();
+        this.listOfCourses = new ArrayList<>();
     }
 
     //creating my unique methods here
@@ -23,13 +21,16 @@ public class School {
         System.out.println("Application received");
     }
     public void reviewApplication(Applicant applicant){
-        if(Double.isNaN(applicant.getPreviousGPA())){
+        if(applicant.getPreviousGPA() == null){
+            applicant.setApplicantStatus(ApplicationStatus.PENDING);
             System.out.println("Application pending");
         }
-        //using the 4.0 GPA scale
-        else if(applicant.getPreviousGPA() > 2.0){
+        //using the 5.0 GPA scale
+        else if(applicant.getPreviousGPA() > 4.0){
+            applicant.setApplicantStatus(ApplicationStatus.ACCEPTED);
             System.out.println("Application accepted");
-        }else if(applicant.getPreviousGPA() < 2.0){
+        }else if(applicant.getPreviousGPA() < 4.0){
+            applicant.setApplicantStatus(ApplicationStatus.REJECTED);
             System.out.println("Application rejected");
         }
         else{
@@ -37,36 +38,27 @@ public class School {
         }
     }
 
+    public String getName() {
+        return name;
+    }
 
-    public String getName(){
-        return this.name;
+    public String getAddress() {
+        return address;
     }
-    public String getAddress(){
-        return this.address;
+
+    public ArrayList<Student> getListOfStudents() {
+        return listOfStudents;
     }
-    public ArrayList<Student> getListOfStudents(){
-        return this.listOfStudents;
+
+    public ArrayList<Classes> getListOfClasses() {
+        return listOfClasses;
     }
-    public ArrayList<Classes> getListOfClasses(){
-        return this.listOfClasses;
+
+    public ArrayList<Teacher> getListOfTeachers() {
+        return listOfTeachers;
     }
-    public ArrayList<Teacher> getListOfTeachers(){
-        return this.listOfTeachers;
-    }
-    public ArrayList<Course> getListOfCourses(){
+
+    public ArrayList<Course> getListOfCourses() {
         return listOfCourses;
     }
-    public void setListOfStudents(ArrayList<Student> listOfStudents){
-        this.listOfStudents = listOfStudents;
-    }
-    public void setListOfClasses(ArrayList<Classes> listOfClasses){
-        this.listOfClasses = listOfClasses;
-    }
-    public void setListOfTeachers(ArrayList<Teacher> listOfTeachers){
-        this.listOfTeachers = listOfTeachers;
-    }
-    public void setListOfCourses(ArrayList<Course> listOfCourses){
-        this.listOfCourses = listOfCourses;
-    }
-
 }

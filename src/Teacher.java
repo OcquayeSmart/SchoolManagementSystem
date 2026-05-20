@@ -1,24 +1,25 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Teacher extends Person{
     private String teacherId;
-    private ArrayList<Course> listOfCourses;
+    private final List<Course> listOfCourses;
 
     Teacher(int id, String firstName, String lastName, String DateOfBirth, String teacherId) {
         super(id, firstName, lastName, DateOfBirth);
         this.teacherId = teacherId;
         listOfCourses = new ArrayList<>();
     }
-    //getters done
-    public String getTeacherId(String teacherId){
+
+    public String getTeacherId() {
         return teacherId;
     }
-    public ArrayList<Course> listOfCourses(ArrayList<Course> listOfCourses){
-        return listOfCourses;
-    }
-    //setters done here
-    public void setTeacherId(String teacherId){
+
+    public void setTeacherId(String teacherId) {
         this.teacherId = teacherId;
     }
 
+    public List<Course> getListOfCourses() {
+        return listOfCourses;
+    }
 }

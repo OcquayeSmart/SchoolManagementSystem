@@ -1,51 +1,56 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Course{
     private String code;
     private String title;
     private Teacher teacher;
-    private Student enrolledStudents;
+    private final List<Student> enrolledStudents;
     private int creditUnits;
 
-    Course(String ClassID, Classes desiredClassLevel, String code, String title, Teacher teacher,  int creditUnits, Student enrolledStudents) {
-        this.code = code;
-        this.title = title;
-        this.teacher = teacher;
-        this.enrolledStudents = enrolledStudents;
+    public Course(int creditUnits, List<Student> enrolledStudents, Teacher teacher, String title, String code) {
         this.creditUnits = creditUnits;
-    }
-    public String getCode(){
-        return this.code;
-    }
-    public String getTitle(){
-        return this.title;
-    }
-    public int getCreditUnits(){
-        return this.creditUnits;
-    }
-    public Teacher getTeacher(){
-        return this.teacher;
-    }
-    public Student getEnrolledStudents(){
-        return this.enrolledStudents;
-    }
-    public void setCode(String code){
+        this.enrolledStudents = new ArrayList<>();
+        this.teacher = teacher;
+        this.title = title;
         this.code = code;
     }
-    public void setTitle(String title){
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
     }
-    public void setTeacher(Teacher teacher){
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
-    public void setEnrolledStudents(Student enrolledStudents){
-        this.enrolledStudents = enrolledStudents;
+
+    public List<Student> getEnrolledStudents() {
+        return enrolledStudents;
     }
-    public void setCreditUnits(int creditUnits){
+
+    public int getCreditUnits() {
+        return creditUnits;
+    }
+
+    public void setCreditUnits(int creditUnits) {
         this.creditUnits = creditUnits;
     }
-
-
 }
 
 

@@ -1,32 +1,24 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Classes{
-    private String classID;
-    //enums are automatically public static final
+    private final String classID;
     private final ClassLevel classLevel;
-    private final ArrayList<Student> listOfStudents;
+    private final List<Student> listOfStudents;
 
-    Classes(String ClassID, ClassLevel level, ArrayList<Student> listOfStudents){
-        String classID;
-        this.listOfStudents = listOfStudents;
-        this.classLevel = level;
-    }
-    //getters
-    public String getClassID(){
-        return this.classID;
-    }
-    public ClassLevel getClassLevel(){
-        return this.classLevel;
-    }
-    public ArrayList<Student> getList(){
-        return this.listOfStudents;
-    }
-
-    //setters
-    public void setClassID(String classID){
+    public Classes(String classID, ClassLevel classLevel, List<Student> listOfStudents) {
         this.classID = classID;
+        this.classLevel = classLevel;
+        this.listOfStudents = new ArrayList<>();
     }
-    public void setlistOfStudents(ArrayList<Student> listOfStudents){
-        listOfStudents = new ArrayList<>();
+
+    public String getClassID() {
+        return classID;
+    }
+    public ClassLevel getClassLevel() {
+        return classLevel;
+    }
+    public List<Student> getListOfStudents() {
+        return listOfStudents;
     }
 }
