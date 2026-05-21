@@ -1,11 +1,13 @@
 import java.util.ArrayList;
+import java.util.List;
+
 public class School {
     private final String name;
     private final String address;
-    private final ArrayList<Student> listOfStudents;
-    private final ArrayList<Classes> listOfClasses;
-    private final ArrayList<Teacher> listOfTeachers;
-    private final ArrayList<Course> listOfCourses;
+    private final List<Student> listOfStudents;
+    private final List<Classes> listOfClasses;
+    private final List<Teacher> listOfTeachers;
+    private final List<Course> listOfCourses;
 
     public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<Teacher> listOfTeachers, ArrayList<Course> listOfCourses) {
         this.name = name;
@@ -17,23 +19,23 @@ public class School {
     }
 
     //creating my unique methods here
-    public void receiveApplication(Applicant applicant){
+    public void receiveApplication(Applicant applicant) {
         System.out.println("Application received");
     }
-    public void reviewApplication(Applicant applicant){
-        if(applicant.getPreviousGPA() == null){
+
+    public void reviewApplication(Applicant applicant) {
+        if (applicant.getPreviousGPA() == null) {
             applicant.setApplicantStatus(ApplicationStatus.PENDING);
             System.out.println("Application pending");
         }
         //using the 5.0 GPA scale
-        else if(applicant.getPreviousGPA() > 4.0){
+        else if (applicant.getPreviousGPA() > 4.0) {
             applicant.setApplicantStatus(ApplicationStatus.ACCEPTED);
             System.out.println("Application accepted");
-        }else if(applicant.getPreviousGPA() < 4.0){
+        } else if (applicant.getPreviousGPA() < 4.0) {
             applicant.setApplicantStatus(ApplicationStatus.REJECTED);
             System.out.println("Application rejected");
-        }
-        else{
+        } else {
             System.out.println(applicant.getPreviousGPA() + " is incorrect");
         }
     }
@@ -46,19 +48,19 @@ public class School {
         return address;
     }
 
-    public ArrayList<Student> getListOfStudents() {
+    public List<Student> getListOfStudents() {
         return listOfStudents;
     }
 
-    public ArrayList<Classes> getListOfClasses() {
+    public List<Classes> getListOfClasses() {
         return listOfClasses;
     }
 
-    public ArrayList<Teacher> getListOfTeachers() {
+    public List<Teacher> getListOfTeachers() {
         return listOfTeachers;
     }
 
-    public ArrayList<Course> getListOfCourses() {
+    public List<Course> getListOfCourses() {
         return listOfCourses;
     }
 }
