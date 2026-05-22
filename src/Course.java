@@ -8,7 +8,7 @@ public class Course{
     private final List<Student> enrolledStudents;
     private int creditUnits;
 
-    public Course(int creditUnits, List<Student> enrolledStudents, Teacher teacher, String title, String code) {
+    public Course(int creditUnits, Teacher teacher, String title, String code) {
         this.creditUnits = creditUnits;
         this.enrolledStudents = new ArrayList<>();
         this.teacher = teacher;

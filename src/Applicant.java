@@ -6,6 +6,7 @@ public class Applicant extends Person{
     private LocalDate applicationDate;
     boolean submitApplication = true;
     private ApplicationStatus applicantStatus;
+    boolean submitted;
 
     public Applicant(int id, String firstName, String lastName, String dateOfBirth, ClassLevel desiredClassLevel, String previousSchool, Double previousGPA, LocalDate applicationDate, boolean submitApplication, ApplicationStatus applicantStatus) {
         super(id, firstName, lastName, dateOfBirth);
@@ -20,7 +21,8 @@ public class Applicant extends Person{
     //methods created here
     public void submitApplication(Applicant applicant){
         System.out.println();
-        //Will remind Miss Olaide to send it tomorrow
+        this.submitted = true;
+        System.out.println("Application submitted for " + getFirstName() + " " + getLastName());
     }
 
     public ClassLevel getDesiredClassLevel() {
