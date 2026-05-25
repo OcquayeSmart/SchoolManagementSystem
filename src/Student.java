@@ -1,31 +1,32 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Student extends Person{
     private final UUID studentID;
-    private Course enrolledCourses;
-    private Classes studentClass;
+    private final List<Course> enrolledCourses;
+    private ClassLevel classlevel;
 
-    Student(int id, String firstName, String lastName, String DateOfBirth, Course enrolledCourses, Classes studentClass){
-        super(id, firstName, lastName, DateOfBirth);
-        studentID = UUID.randomUUID();
-        this.enrolledCourses = enrolledCourses;
-        this.studentClass = studentClass;
+    public Student(int id, String firstName, String lastName, String dateOfBirth, UUID studentID, List<Course> enrolledCourses, ClassLevel classlevel) {
+        super(id, firstName, lastName, dateOfBirth);
+        this.studentID = UUID.randomUUID();
+        this.enrolledCourses = new ArrayList<>();
+        this.classlevel = classlevel;
     }
-    //getters done here as well
-    public UUID getStudentID(){
-        return this.studentID;
+
+    public UUID getStudentID() {
+        return studentID;
     }
-    public Course getEnrolledCourses(){
-        return this.enrolledCourses;
+
+    public ClassLevel getClasslevel() {
+        return classlevel;
     }
-    public Classes getStudentClass(){
-        return this.studentClass;
+
+    public void setClasslevel(ClassLevel classlevel) {
+        this.classlevel = classlevel;
     }
-    //setters here also complete// this is kinda repetitive
-    public void setEnrolledCourses(Course enrolledCourses){
-        this.enrolledCourses = enrolledCourses;
-    }
-    public void setStudentClass(Classes studentClass){
-        this.studentClass = studentClass;
+
+    public List<Course> getEnrolledCourses() {
+        return enrolledCourses;
     }
 }

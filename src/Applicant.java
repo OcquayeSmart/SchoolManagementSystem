@@ -1,44 +1,75 @@
 import java.time.LocalDate;
-
 public class Applicant extends Person{
     private ClassLevel desiredClassLevel;
     private String previousSchool;
-    private double previousGPA;
+    private Double previousGPA;
     private LocalDate applicationDate;
+    boolean submitApplication = true;
+    private ApplicationStatus applicantStatus;
+    boolean submitted;
 
-    Applicant(int id, String firstName, String lastName, String DateOfBirth, String previousSchool, double previousGPA, LocalDate applicationDate, ClassLevel DesiredClassLevel){
-        super(id, firstName, lastName, DateOfBirth);
+    public Applicant(int id, String firstName, String lastName, String dateOfBirth, ClassLevel desiredClassLevel, String previousSchool, Double previousGPA, LocalDate applicationDate, boolean submitApplication, ApplicationStatus applicantStatus) {
+        super(id, firstName, lastName, dateOfBirth);
+        this.desiredClassLevel = desiredClassLevel;
         this.previousSchool = previousSchool;
         this.previousGPA = previousGPA;
-        applicationDate = LocalDate.now();
-        this.desiredClassLevel = desiredClassLevel;
+        this.applicationDate = applicationDate;
+        this.submitApplication = submitApplication;
+        this.applicantStatus = applicantStatus;
     }
 
-    //getters
-    public String getPreviousSchool(){
-        return this.previousSchool;
+    //methods created here
+    public void submitApplication(Applicant applicant){
+        System.out.println();
+        this.submitted = true;
+        System.out.println("Application submitted for " + getFirstName() + " " + getLastName());
     }
-    public double getPreviousGPA(){
-        return this.previousGPA;
+
+    public ClassLevel getDesiredClassLevel() {
+        return desiredClassLevel;
     }
-    public ClassLevel getDesiredClassLevel(){
-        return this.desiredClassLevel;
+
+    public String getPreviousSchool() {
+        return previousSchool;
     }
-    public LocalDate getApplicationDate(){
+
+    public Double getPreviousGPA() {
+        return previousGPA;
+    }
+
+    public LocalDate getApplicationDate() {
         return applicationDate;
     }
-    //setters
-    public void setPreviousSchool(String previousSchool){
-        this.previousSchool = previousSchool;
+
+    public boolean isSubmitApplication() {
+        return submitApplication;
     }
-    public void setPreviousGPA(double previousGPA){
-        this.previousGPA = previousGPA;
+
+    public ApplicationStatus getApplicantStatus() {
+        return applicantStatus;
     }
-    public void setApplicationDate(LocalDate applicationDate){
-        this.applicationDate = applicationDate;
-    }
-    public void setDesiredClassLevel(ClassLevel desiredClassLevel){
+
+    public void setDesiredClassLevel(ClassLevel desiredClassLevel) {
         this.desiredClassLevel = desiredClassLevel;
     }
 
+    public void setPreviousSchool(String previousSchool) {
+        this.previousSchool = previousSchool;
+    }
+
+    public void setPreviousGPA(Double previousGPA) {
+        this.previousGPA = previousGPA;
+    }
+
+    public void setApplicationDate(LocalDate applicationDate) {
+        this.applicationDate = applicationDate;
+    }
+
+    public void setSubmitApplication(boolean submitApplication) {
+        this.submitApplication = submitApplication;
+    }
+
+    public void setApplicantStatus(ApplicationStatus applicantStatus) {
+        this.applicantStatus = applicantStatus;
+    }
 }
