@@ -1,3 +1,5 @@
+import org.w3c.dom.ls.LSOutput;
+
 public abstract class Staff extends Person{
     private String getStaffId;
     private String staffId;
@@ -8,6 +10,9 @@ public abstract class Staff extends Person{
         this.getStaffId = getStaffId;
         this.staffId = staffId;
         this.salary = salary;
+    }
+    Role getRole(Role role){
+        return role;
     }
     public String getGetStaffId() {
         return getStaffId;
