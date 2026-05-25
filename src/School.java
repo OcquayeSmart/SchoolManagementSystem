@@ -6,10 +6,10 @@ public class School {
     private final String address;
     private final List<Student> listOfStudents;
     private final List<Classes> listOfClasses;
-    private final List<Teacher> listOfTeachers;
+    private final List<TeachingStaff> listOfTeachers;
     private final List<Course> listOfCourses;
 
-    public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<Teacher> listOfTeachers, ArrayList<Course> listOfCourses) {
+    public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<TeachingStaff> listOfTeachers, ArrayList<Course> listOfCourses) {
         this.name = name;
         this.address = address;
         this.listOfStudents = new ArrayList<>();
@@ -56,7 +56,7 @@ public class School {
         return listOfClasses;
     }
 
-    public List<Teacher> getListOfTeachers() {
+    public List<TeachingStaff> getListOfTeachers() {
         return listOfTeachers;
     }
 

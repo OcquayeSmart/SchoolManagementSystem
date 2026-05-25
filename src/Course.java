@@ -4,11 +4,11 @@ import java.util.List;
 public class Course{
     private String code;
     private String title;
-    private Teacher teacher;
+    private TeachingStaff teacher;
     private final List<Student> enrolledStudents;
     private int creditUnits;
 
-    public Course(int creditUnits, Teacher teacher, String title, String code) {
+    public Course(int creditUnits, TeachingStaff teacher, String title, String code) {
         this.creditUnits = creditUnits;
         this.enrolledStudents = new ArrayList<>();
         this.teacher = teacher;
@@ -32,11 +32,11 @@ public class Course{
         this.title = title;
     }
 
-    public Teacher getTeacher() {
+    public TeachingStaff getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(Teacher teacher) {
+    public void setTeacher(TeachingStaff teacher) {
         this.teacher = teacher;
     }
 
