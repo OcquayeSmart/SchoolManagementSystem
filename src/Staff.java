@@ -5,9 +5,8 @@ public abstract class Staff extends Person{
     private String staffId;
     private double salary;
 
-    public Staff(int id, String firstName, String lastName, String dateOfBirth, String getStaffId, String staffId, double salary, Role role) {
+    public Staff(int id, String firstName, String lastName, String dateOfBirth, String staffId, double salary, Role role) {
         super(id, firstName, lastName, dateOfBirth);
-        this.getStaffId = getStaffId;
         this.staffId = staffId;
         this.salary = salary;
     }
