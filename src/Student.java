@@ -5,13 +5,13 @@ import java.util.UUID;
 public class Student extends Person{
     private final UUID studentID;
     private final List<Course> enrolledCourses;
-    private ClassLevel classlevel;
+    private ClassLevel classLevel;
 
     public Student(int id, String firstName, String lastName, String dateOfBirth, UUID studentID, List<Course> enrolledCourses, ClassLevel classlevel) {
         super(id, firstName, lastName, dateOfBirth);
         this.studentID = UUID.randomUUID();
         this.enrolledCourses = new ArrayList<>();
-        this.classlevel = classlevel;
+        this.classLevel = classlevel;
     }
 
     public UUID getStudentID() {
@@ -19,11 +19,10 @@ public class Student extends Person{
     }
 
     public ClassLevel getClasslevel() {
-        return classlevel;
+        return classLevel;
     }
-
-    public void setClasslevel(ClassLevel classlevel) {
-        this.classlevel = classlevel;
+    public void setClassLevel(ClassLevel classlevel) {
+        this.classLevel = classlevel;
     }
 
     public List<Course> getEnrolledCourses() {
