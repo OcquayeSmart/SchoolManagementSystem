@@ -1,8 +1,5 @@
-import org.w3c.dom.ls.LSOutput;
-
 public abstract class Staff extends Person{
-    private String getStaffId;
-    private String staffId;
+    private final String staffId;
     private double salary;
 
     public Staff(int id, String firstName, String lastName, String dateOfBirth, String staffId, double salary, Role role) {
@@ -13,20 +10,9 @@ public abstract class Staff extends Person{
     Role getRole(Role role){
         return role;
     }
-    public String getGetStaffId() {
-        return getStaffId;
-    }
-
-    public void setGetStaffId(String getStaffId) {
-        this.getStaffId = getStaffId;
-    }
 
     public String getStaffId() {
         return staffId;
-    }
-
-    public void setStaffId(String staffId) {
-        this.staffId = staffId;
     }
 
     public double getSalary() {

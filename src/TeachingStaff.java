@@ -1,8 +1,8 @@
 import java.util.List;
 
 public class TeachingStaff extends Staff{
-    List<Course> listOfCourses;
-    Department department;
+    private final List<Course> listOfCourses;
+    private final Department department;
 
     public TeachingStaff(int id, String firstName, String lastName, String dateOfBirth, String getStaffId, String staffId, double salary, Role role, List<Course> listOfCourses, Department department) {
         super(id, firstName, lastName, dateOfBirth, staffId, salary, role);
@@ -13,15 +13,7 @@ public class TeachingStaff extends Staff{
         return listOfCourses;
     }
 
-    public void setListOfCourses(List<Course> listOfCourses) {
-        this.listOfCourses = listOfCourses;
-    }
-
     public Department getDepartment() {
         return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 }
