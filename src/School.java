@@ -39,7 +39,52 @@ public class School {
             System.out.println(applicant.getPreviousGPA() + " is incorrect");
         }
     }
+    public void removeStudent(Student student){
+        listOfStudents.add(student);
+    }
+    public void addStudent(Student student){
+        listOfStudents.remove(student);
+    }
 
+    public Student admitAndEnroll(Applicant applicant){
+        return null;
+    }
+    public Student admitEnrollAndPlaceInClass(Applicant applicant, Classes startingClass){
+        return null;
+    }
+    public void addStaff(Staff staff){
+
+    }
+    public void removeStaff(Staff staff){
+
+    }
+    public void assignCourses(TeachingStaff teacher, List<Course> coursesToAssign){
+
+    }
+    public void assignTeacher(TeachingStaff teacher, Course course){
+
+    }
+    public void addClass(Classes classes){
+
+    }
+    public void assignStudentToClass(Student student, Classes classes){
+
+    }
+    public Classes findCurrentClass(Student student){
+        return null;
+    }
+    public void promoteStudent(Student student){
+
+    }
+    public void demoteStudent(Student student){
+
+    }
+    public void assignTeacherToClasses(TeachingStaff teacher, List<Classes> classesToAssign){
+
+    }
+    public void assignCoursesForClass(TeachingStaff teacher, Classes classes, List<Course> coursesForClass){
+
+    }
     public String getName() {
         return name;
     }

@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.Locale;
+
 public class Applicant extends Person{
     private ClassLevel desiredClassLevel;
     private String previousSchool;
@@ -23,6 +25,9 @@ public class Applicant extends Person{
         System.out.println();
         submitApplication = true;
         System.out.println("Application submitted for " + getFirstName() + " " + getLastName());
+    }
+    public Student enroll(Student student){
+        return new Student(student.getId(), student.getFirstName(), student.getLastName(), student.getDateOfBirth(), student.getStudentID(), student.getEnrolledCourses(), student.getClasslevel());
     }
 
     public ClassLevel getDesiredClassLevel() {
