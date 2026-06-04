@@ -5,14 +5,13 @@ public class Classes{
     private final String classID;
     private final ClassLevel classLevel;
     private final List<Student> listOfStudents;
-    private boolean hasStudent = false;
+    private final boolean hasStudent;
 
     public Classes(String classID, ClassLevel classLevel, List<Student> listOfStudents, boolean hasStudent) {
         this.classID = classID;
         this.classLevel = classLevel;
         this.listOfStudents = new ArrayList<>();
         this.hasStudent = hasStudent;
-
     }
 
     public void addStudent(Student student){
@@ -22,14 +21,13 @@ public class Classes{
         listOfStudents.remove(student);
     }
     public boolean hasStudent(Student student){
-        hasStudent = listOfStudents.contains(student);
-        return hasStudent;
+        if(listOfStudents.contains(student)){
+            return hasStudent;
+        }
+        return false;
     }
     public int size(){
         return listOfStudents.size();
-    }
-    public Classes findClassByLevel(ClassLevel level){
-
     }
     public String getClassID() {
         return classID;

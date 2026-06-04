@@ -39,6 +39,16 @@ public class School {
             System.out.println(applicant.getPreviousGPA() + " is incorrect");
         }
     }
+
+    public Classes findClassByLevel(ClassLevel level){
+        for(Classes clas:listOfClasses){
+            if(clas.getClassLevel() == level){
+                return clas;
+            }
+        }
+        return null;
+    }
+
     public void removeStudent(Student student){
         listOfStudents.add(student);
     }
@@ -71,13 +81,35 @@ public class School {
 
     }
     public Classes findCurrentClass(Student student){
-        return null;
+       for(Classes classes:listOfClasses){
+           if(classes.hasStudent(student)){
+               return classes;
+           }
+       }
+       return null;
     }
     public void promoteStudent(Student student){
-
+        Classes currentClass = findCurrentClass(student);
+        int nextClassOrdinal = currentClass.getClassLevel().ordinal() + 1;
+        ClassLevel[] all_class_levels = ClassLevel.values();
+        if(nextClassOrdinal < all_class_levels.length){
+            Classes nextClass = findClassByLevel(all_class_levels[nextClassOrdinal]);
+            currentClass.removeStudent(student);
+        }
+        else{
+            student.setHasGraduated(true);
+            currentClass.removeStudent(student);
+        }
     }
     public void demoteStudent(Student student){
+        Classes currentClass = findCurrentClass(student);
+        int previousClassOrdinal = currentClass.getClassLevel().ordinal() - 1;
 
+        ClassLevel[] all_class_levels = ClassLevel.values();
+        if(previousClassOrdinal >= 0){
+            Classes previousClass = findClassByLevel(all_class_levels[previousClassOrdinal]);
+            currentClass.removeStudent(student);
+        }
     }
     public void assignTeacherToClasses(TeachingStaff teacher, List<Classes> classesToAssign){
 

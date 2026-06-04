@@ -6,5 +6,5 @@ public enum ClassLevel{
     CLASS_5,
     CLASS_6,
     CLASS_7,
-    CLASS_8,
+    CLASS_8
 }

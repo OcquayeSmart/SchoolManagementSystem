@@ -15,7 +15,7 @@ public class Student extends Person{
         this.classLevel = classlevel;
     }
     public boolean hasGraduated(){
-        return true;
+        return graduated;
     }
     public void enrollInCourse(Course course){
         if(enrolledCourses.contains(course)){
@@ -27,6 +27,7 @@ public class Student extends Person{
     }
     public void dropCourse(Course course){
         enrolledCourses.remove(course);
+        System.out.println(course.getCode() + " has been removed");
     }
     public UUID getStudentID() {
         return this.studentID;
