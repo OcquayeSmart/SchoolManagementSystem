@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Staff extends Person{
     private final String staffId;
     private double salary;

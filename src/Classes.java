@@ -21,10 +21,7 @@ public class Classes{
         listOfStudents.remove(student);
     }
     public boolean hasStudent(Student student){
-        if(listOfStudents.contains(student)){
-            return hasStudent;
-        }
-        return false;
+        return listOfStudents.contains(student);
     }
     public int size(){
         return listOfStudents.size();

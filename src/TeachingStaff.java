@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class TeachingStaff extends Staff{
     private final List<Course> listOfCourses;
     private final Department department;
 
-    public TeachingStaff(int id, String firstName, String lastName, String dateOfBirth, String getStaffId, String staffId, double salary, Role role, List<Course> listOfCourses, Department department) {
+    public TeachingStaff(int id, String firstName, String lastName, String dateOfBirth, String getStaffId, String staffId, double salary, Role role, List<Course> listOfCourses, List<Staff> TeachingStaff, Department department) {
         super(id, firstName, lastName, dateOfBirth, staffId, salary, role);
         this.listOfCourses = listOfCourses;
         this.department = department;

@@ -6,15 +6,17 @@ public class School {
     private final String address;
     private final List<Student> listOfStudents;
     private final List<Classes> listOfClasses;
-    private final List<TeachingStaff> listOfTeachers;
+    private final List<TeachingStaff> listOfTeachingStaff;
     private final List<Course> listOfCourses;
+    private final List<Staff> listOfStaff;
 
-    public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<TeachingStaff> listOfTeachers, ArrayList<Course> listOfCourses) {
+    public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<TeachingStaff> listOfTeachingStaff, ArrayList<Course> listOfCourses, List<Staff> listOfStaff) {
         this.name = name;
         this.address = address;
+        this.listOfStaff = listOfStaff;
         this.listOfStudents = new ArrayList<>();
         this.listOfClasses = new ArrayList<>();
-        this.listOfTeachers = new ArrayList<>();
+        this.listOfTeachingStaff = new ArrayList<>();
         this.listOfCourses = new ArrayList<>();
     }
 
@@ -68,19 +70,21 @@ public class School {
         return newStudent;
     }
     public void addStaff(Staff staff){
-
+        listOfStaff.add(staff);
     }
     public void removeStaff(Staff staff){
-
+        listOfStaff.remove(staff);
     }
     public void assignCourses(TeachingStaff teacher, List<Course> coursesToAssign){
-
+        for(Course course:coursesToAssign){
+            assignTeacher(teacher, course);
+        }
     }
     public void assignTeacher(TeachingStaff teacher, Course course){
-
+        course.setTeacher(teacher);
     }
     public void addClass(Classes classes){
-
+        listOfClasses.add(classes);
     }
     public void assignStudentToClass(Student student, Classes classes){
 
@@ -139,8 +143,12 @@ public class School {
         return listOfClasses;
     }
 
-    public List<TeachingStaff> getListOfTeachers() {
-        return listOfTeachers;
+    public List<TeachingStaff> getListOfTeachingStaff() {
+        return listOfTeachingStaff;
+    }
+
+    public List<Staff> getListOfStaff() {
+        return listOfStaff;
     }
 
     public List<Course> getListOfCourses() {
