@@ -8,7 +8,7 @@ public class Student extends Person{
     private ClassLevel classLevel;
     private boolean hasGraduated = false;
 
-    public Student(int id, String firstName, String lastName, String dateOfBirth, UUID studentID, List<Course> enrolledCourses, ClassLevel classlevel) {
+    public Student(int id, String firstName, String lastName, String dateOfBirth, ClassLevel classlevel) {
         super(id, firstName, lastName, dateOfBirth);
         this.studentID = UUID.randomUUID();
         this.enrolledCourses = new ArrayList<>();

@@ -50,17 +50,22 @@ public class School {
     }
 
     public void removeStudent(Student student){
-        listOfStudents.add(student);
+        listOfStudents.remove(student);
     }
     public void addStudent(Student student){
-        listOfStudents.remove(student);
+        listOfStudents.add(student);
     }
 
     public Student admitAndEnroll(Applicant applicant){
-        return null;
+        Student newStudent = applicant.enroll();
+        listOfStudents.add(newStudent);
+        return newStudent;
+
     }
     public Student admitEnrollAndPlaceInClass(Applicant applicant, Classes startingClass){
-        return null;
+        Student newStudent = admitAndEnroll(applicant);
+        assignStudentToClass(newStudent, startingClass);
+        return newStudent;
     }
     public void addStaff(Staff staff){
 
@@ -94,6 +99,7 @@ public class School {
         ClassLevel[] all_class_levels = ClassLevel.values();
         if(nextClassOrdinal < all_class_levels.length){
             Classes nextClass = findClassByLevel(all_class_levels[nextClassOrdinal]);
+            assignStudentToClass(student, nextClass);
             currentClass.removeStudent(student);
         }
         else{

@@ -26,8 +26,8 @@ public class Applicant extends Person{
         submitApplication = true;
         System.out.println("Application submitted for " + getFirstName() + " " + getLastName());
     }
-    public Student enroll(Student student){
-        return new Student(student.getId(), student.getFirstName(), student.getLastName(), student.getDateOfBirth(), student.getStudentID(), student.getEnrolledCourses(), student.getClasslevel());
+    public Student enroll(){
+        return new Student(this.getId(), this.getFirstName(), this.getLastName(), this.getDateOfBirth(),this.desiredClassLevel);
     }
 
     public ClassLevel getDesiredClassLevel() {
