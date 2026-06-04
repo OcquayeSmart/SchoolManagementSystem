@@ -122,10 +122,15 @@ public class School {
         }
     }
     public void assignTeacherToClasses(TeachingStaff teacher, List<Classes> classesToAssign){
-
+        for(Classes classes:classesToAssign){
+            classes.addTeacher(teacher);
+        }
     }
-    public void assignCoursesForClass(TeachingStaff teacher, Classes classes, List<Course> coursesForClass){
-
+    public void assignCoursesForClass(TeachingStaff teacher, Classes classes, List<Course> coursesForClass, Course course){
+        for(Course clas:coursesForClass){
+            assignTeacher(teacher, clas);
+            classes.addCourse(clas);
+        }
     }
     public String getName() {
         return name;
