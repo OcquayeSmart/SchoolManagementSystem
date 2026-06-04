@@ -15,7 +15,8 @@ public class Student extends Person{
         this.classLevel = classlevel;
     }
     public boolean hasGraduated(){
-        return graduated;
+        //check this code again
+        return hasGraduated;
     }
     public void enrollInCourse(Course course){
         if(enrolledCourses.contains(course)){
