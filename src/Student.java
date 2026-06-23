@@ -14,21 +14,27 @@ public class Student extends Person{
         this.enrolledCourses = new ArrayList<>();
         this.classLevel = classlevel;
     }
-    public boolean hasGraduated(){
-        //check this code again
-        return hasGraduated;
-    }
+//    public boolean hasGraduated(){
+//        //check this code again
+//        return hasGraduated;
+//    }
     public void enrollInCourse(Course course){
-        if(enrolledCourses.contains(course)){
+        if(!enrolledCourses.contains(course)){
             enrolledCourses.add(course);
+            System.out.println("Successfully enrolled in " + course.getTitle());
         }
         else{
-            System.out.println("Already enrolled in course");
+            System.out.println("Already enrolled in " + course.getTitle());
         }
     }
     public void dropCourse(Course course){
-        enrolledCourses.remove(course);
-        System.out.println(course.getCode() + " has been removed");
+        if(enrolledCourses.contains(course)){
+            enrolledCourses.remove(course);
+            System.out.println(course.getCode() + " has been removed");
+        }
+        else{
+            System.out.println("Have not enrolled in course");
+        }
     }
     public UUID getStudentID() {
         return this.studentID;

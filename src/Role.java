@@ -1,3 +1,0 @@
-public enum Role {
-STUDENT, TEACHER, ADMINISTRATOR, APPLICANT
-}

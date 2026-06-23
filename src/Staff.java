@@ -4,16 +4,14 @@ import java.util.List;
 public abstract class Staff extends Person{
     private final String staffId;
     private double salary;
-    private Role role;
-    public Staff(int id, String firstName, String lastName, String dateOfBirth, String staffId, double salary, Role role) {
+    private String role;
+    public Staff(int id, String firstName, String lastName, String dateOfBirth, String staffId, double salary, String role) {
         super(id, firstName, lastName, dateOfBirth);
         this.staffId = staffId;
         this.salary = salary;
         this.role = role;
     }
-    Role getRole(Role role){
-        return role;
-    }
+
 
     public String getStaffId() {
         return staffId;
@@ -27,7 +25,11 @@ public abstract class Staff extends Person{
         this.salary = salary;
     }
 
-    public void setRole(Role role) {
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
         this.role = role;
     }
 }

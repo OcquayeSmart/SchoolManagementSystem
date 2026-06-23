@@ -19,8 +19,6 @@ public class Applicant extends Person{
         this.submitApplication = false;
         this.applicantStatus = applicantStatus;
     }
-
-    //methods created here
     public void submitApplication(Applicant applicant){
         System.out.println();
         submitApplication = true;

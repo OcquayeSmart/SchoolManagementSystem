@@ -18,19 +18,22 @@ public class Classes{
     }
 
     public void addStudent(Student student){
-        listOfStudents.add(student);
+        if(listOfStudents.contains(student)){
+            listOfStudents.add(student);
+        }
     }
+
+    //for the remove statements, Java already does those automatically
     public void removeStudent(Student student){
         listOfStudents.remove(student);
     }
     public boolean hasStudent(Student student){
         return listOfStudents.contains(student);
     }
-    public void addTeacher(TeachingStaff teacher){
-        teachingStaffs.add(teacher);
-    }
     public void addCourse(Course course){
-        courses.add(course);
+        if(courses.contains(course)){
+            courses.add(course);
+        }
     }
 
     public int size(){

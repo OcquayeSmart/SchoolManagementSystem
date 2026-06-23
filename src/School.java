@@ -55,7 +55,9 @@ public class School {
         listOfStudents.remove(student);
     }
     public void addStudent(Student student){
-        listOfStudents.add(student);
+        if(listOfStudents.contains(student)) {
+            listOfStudents.add(student);
+        }
     }
 
     public Student admitAndEnroll(Applicant applicant){
@@ -70,32 +72,27 @@ public class School {
         return newStudent;
     }
     public void addStaff(Staff staff){
-        listOfStaff.add(staff);
+        if(listOfStaff.contains(staff)){
+            listOfStaff.add(staff);
+        }
     }
+    //Java handles the remove statement automatically
     public void removeStaff(Staff staff){
         listOfStaff.remove(staff);
-    }
-    public void assignCourses(TeachingStaff teacher, List<Course> coursesToAssign){
-        for(Course course:coursesToAssign){
-            assignTeacher(teacher, course);
-        }
     }
     public void assignTeacher(TeachingStaff teacher, Course course){
         course.setTeacher(teacher);
     }
     public void addClass(Classes classes){
-        listOfClasses.add(classes);
+        if(listOfClasses.contains(classes)){
+            listOfClasses.add(classes);
+        }
     }
     public void assignStudentToClass(Student student, Classes classes){
-
+        classes.addStudent(student);
     }
     public Classes findCurrentClass(Student student){
-       for(Classes classes:listOfClasses){
-           if(classes.hasStudent(student)){
-               return classes;
-           }
-       }
-       return null;
+       return findClassByLevel(student.getClasslevel());
     }
     public void promoteStudent(Student student){
         Classes currentClass = findCurrentClass(student);
@@ -121,15 +118,10 @@ public class School {
             currentClass.removeStudent(student);
         }
     }
-    public void assignTeacherToClasses(TeachingStaff teacher, List<Classes> classesToAssign){
-        for(Classes classes:classesToAssign){
-            classes.addTeacher(teacher);
-        }
-    }
-    public void assignCoursesForClass(TeachingStaff teacher, Classes classes, List<Course> coursesForClass, Course course){
-        for(Course clas:coursesForClass){
-            assignTeacher(teacher, clas);
-            classes.addCourse(clas);
+    public void assignCoursesForClass(TeachingStaff teacher, Classes classes, List<Course> coursesForClass){
+        for(Course course:coursesForClass){
+            classes.addCourse(course);
+            assignTeacher(teacher, course);
         }
     }
     public String getName() {
