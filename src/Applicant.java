@@ -1,12 +1,14 @@
 import java.time.LocalDate;
+import java.util.Locale;
+
 public class Applicant extends Person{
     private ClassLevel desiredClassLevel;
     private String previousSchool;
     private Double previousGPA;
     private LocalDate applicationDate;
-    boolean submitApplication = true;
+    boolean submitApplication;
     private ApplicationStatus applicantStatus;
-    boolean submitted;
+
 
     public Applicant(int id, String firstName, String lastName, String dateOfBirth, ClassLevel desiredClassLevel, String previousSchool, Double previousGPA, LocalDate applicationDate, boolean submitApplication, ApplicationStatus applicantStatus) {
         super(id, firstName, lastName, dateOfBirth);
@@ -14,15 +16,16 @@ public class Applicant extends Person{
         this.previousSchool = previousSchool;
         this.previousGPA = previousGPA;
         this.applicationDate = applicationDate;
-        this.submitApplication = submitApplication;
+        this.submitApplication = false;
         this.applicantStatus = applicantStatus;
     }
-
-    //methods created here
     public void submitApplication(Applicant applicant){
         System.out.println();
-        this.submitted = true;
+        submitApplication = true;
         System.out.println("Application submitted for " + getFirstName() + " " + getLastName());
+    }
+    public Student enroll(){
+        return new Student(this.getId(), this.getFirstName(), this.getLastName(), this.getDateOfBirth(),this.desiredClassLevel);
     }
 
     public ClassLevel getDesiredClassLevel() {

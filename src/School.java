@@ -6,15 +6,17 @@ public class School {
     private final String address;
     private final List<Student> listOfStudents;
     private final List<Classes> listOfClasses;
-    private final List<Teacher> listOfTeachers;
+    private final List<TeachingStaff> listOfTeachingStaff;
     private final List<Course> listOfCourses;
+    private final List<Staff> listOfStaff;
 
-    public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<Teacher> listOfTeachers, ArrayList<Course> listOfCourses) {
+    public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<TeachingStaff> listOfTeachingStaff, ArrayList<Course> listOfCourses, List<Staff> listOfStaff) {
         this.name = name;
         this.address = address;
+        this.listOfStaff = listOfStaff;
         this.listOfStudents = new ArrayList<>();
         this.listOfClasses = new ArrayList<>();
-        this.listOfTeachers = new ArrayList<>();
+        this.listOfTeachingStaff = new ArrayList<>();
         this.listOfCourses = new ArrayList<>();
     }
 
@@ -40,6 +42,88 @@ public class School {
         }
     }
 
+    public Classes findClassByLevel(ClassLevel level){
+        for(Classes clas:listOfClasses){
+            if(clas.getClassLevel() == level){
+                return clas;
+            }
+        }
+        return null;
+    }
+
+    public void removeStudent(Student student){
+        listOfStudents.remove(student);
+    }
+    public void addStudent(Student student){
+        if(listOfStudents.contains(student)) {
+            listOfStudents.add(student);
+        }
+    }
+
+    public Student admitAndEnroll(Applicant applicant){
+        Student newStudent = applicant.enroll();
+        listOfStudents.add(newStudent);
+        return newStudent;
+
+    }
+    public Student admitEnrollAndPlaceInClass(Applicant applicant, Classes startingClass){
+        Student newStudent = admitAndEnroll(applicant);
+        assignStudentToClass(newStudent, startingClass);
+        return newStudent;
+    }
+    public void addStaff(Staff staff){
+        if(listOfStaff.contains(staff)){
+            listOfStaff.add(staff);
+        }
+    }
+    //Java handles the remove statement automatically
+    public void removeStaff(Staff staff){
+        listOfStaff.remove(staff);
+    }
+    public void assignTeacher(TeachingStaff teacher, Course course){
+        course.setTeacher(teacher);
+    }
+    public void addClass(Classes classes){
+        if(listOfClasses.contains(classes)){
+            listOfClasses.add(classes);
+        }
+    }
+    public void assignStudentToClass(Student student, Classes classes){
+        classes.addStudent(student);
+    }
+    public Classes findCurrentClass(Student student){
+       return findClassByLevel(student.getClasslevel());
+    }
+    public void promoteStudent(Student student){
+        Classes currentClass = findCurrentClass(student);
+        int nextClassOrdinal = currentClass.getClassLevel().ordinal() + 1;
+        ClassLevel[] all_class_levels = ClassLevel.values();
+        if(nextClassOrdinal < all_class_levels.length){
+            Classes nextClass = findClassByLevel(all_class_levels[nextClassOrdinal]);
+            assignStudentToClass(student, nextClass);
+            currentClass.removeStudent(student);
+        }
+        else{
+            student.setHasGraduated(true);
+            currentClass.removeStudent(student);
+        }
+    }
+    public void demoteStudent(Student student){
+        Classes currentClass = findCurrentClass(student);
+        int previousClassOrdinal = currentClass.getClassLevel().ordinal() - 1;
+
+        ClassLevel[] all_class_levels = ClassLevel.values();
+        if(previousClassOrdinal >= 0){
+            Classes previousClass = findClassByLevel(all_class_levels[previousClassOrdinal]);
+            currentClass.removeStudent(student);
+        }
+    }
+    public void assignCoursesForClass(TeachingStaff teacher, Classes classes, List<Course> coursesForClass){
+        for(Course course:coursesForClass){
+            classes.addCourse(course);
+            assignTeacher(teacher, course);
+        }
+    }
     public String getName() {
         return name;
     }
@@ -56,8 +140,12 @@ public class School {
         return listOfClasses;
     }
 
-    public List<Teacher> getListOfTeachers() {
-        return listOfTeachers;
+    public List<TeachingStaff> getListOfTeachingStaff() {
+        return listOfTeachingStaff;
+    }
+
+    public List<Staff> getListOfStaff() {
+        return listOfStaff;
     }
 
     public List<Course> getListOfCourses() {
