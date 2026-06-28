@@ -13,17 +13,16 @@ public class Classes{
         this.classID = classID;
         this.classLevel = classLevel;
         this.teachingStaffs = teachingStaffs;
-        this.listOfStudents = new ArrayList<>();
+        this.listOfStudents = listOfStudents;
         this.hasStudent = hasStudent;
     }
 
     public void addStudent(Student student){
-        if(listOfStudents.contains(student)){
+        if(!listOfStudents.contains(student)){
             listOfStudents.add(student);
         }
     }
 
-    //for the remove statements, Java already does those automatically
     public void removeStudent(Student student){
         listOfStudents.remove(student);
     }
@@ -31,7 +30,7 @@ public class Classes{
         return listOfStudents.contains(student);
     }
     public void addCourse(Course course){
-        if(courses.contains(course)){
+        if(!courses.contains(course)){
             courses.add(course);
         }
     }
