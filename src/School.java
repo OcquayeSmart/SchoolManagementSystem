@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public class School {
@@ -10,19 +9,20 @@ public class School {
     private final List<Course> listOfCourses;
     private final List<Staff> listOfStaff;
 
-    public School(String name, String address, ArrayList<Student> listOfStudents, ArrayList<Classes> listOfClasses, ArrayList<TeachingStaff> listOfTeachingStaff, ArrayList<Course> listOfCourses, List<Staff> listOfStaff) {
+    public School(String name, String address, List<Student> listOfStudents, List<Classes> listOfClasses,
+                  List<TeachingStaff> listOfTeachingStaff, List<Course> listOfCourses, List<Staff> listOfStaff) {
         this.name = name;
         this.address = address;
         this.listOfStaff = listOfStaff;
-        this.listOfStudents = new ArrayList<>();
-        this.listOfClasses = new ArrayList<>();
-        this.listOfTeachingStaff = new ArrayList<>();
-        this.listOfCourses = new ArrayList<>();
+        this.listOfStudents = listOfStudents;
+        this.listOfClasses = listOfClasses;
+        this.listOfTeachingStaff = listOfTeachingStaff;
+        this.listOfCourses = listOfCourses;
     }
 
     //creating my unique methods here
     public void receiveApplication(Applicant applicant) {
-        System.out.println("Application received");
+        System.out.println(applicant.getFirstName()+" "+applicant.getLastName() + "'s application has been received" );
     }
 
     public void reviewApplication(Applicant applicant) {
@@ -31,14 +31,12 @@ public class School {
             System.out.println("Application pending");
         }
         //using the 5.0 GPA scale
-        else if (applicant.getPreviousGPA() > 4.0) {
+        else if (applicant.getPreviousGPA() >= 4.0) {
             applicant.setApplicantStatus(ApplicationStatus.ACCEPTED);
             System.out.println("Application accepted");
-        } else if (applicant.getPreviousGPA() < 4.0) {
+        } else {
             applicant.setApplicantStatus(ApplicationStatus.REJECTED);
             System.out.println("Application rejected");
-        } else {
-            System.out.println(applicant.getPreviousGPA() + " is incorrect");
         }
     }
 
@@ -55,7 +53,7 @@ public class School {
         listOfStudents.remove(student);
     }
     public void addStudent(Student student){
-        if(listOfStudents.contains(student)) {
+        if(!listOfStudents.contains(student)) {
             listOfStudents.add(student);
         }
     }
@@ -72,11 +70,10 @@ public class School {
         return newStudent;
     }
     public void addStaff(Staff staff){
-        if(listOfStaff.contains(staff)){
+        if(!listOfStaff.contains(staff)){
             listOfStaff.add(staff);
         }
     }
-    //Java handles the remove statement automatically
     public void removeStaff(Staff staff){
         listOfStaff.remove(staff);
     }
@@ -84,7 +81,7 @@ public class School {
         course.setTeacher(teacher);
     }
     public void addClass(Classes classes){
-        if(listOfClasses.contains(classes)){
+        if(!listOfClasses.contains(classes)){
             listOfClasses.add(classes);
         }
     }
@@ -115,6 +112,7 @@ public class School {
         ClassLevel[] all_class_levels = ClassLevel.values();
         if(previousClassOrdinal >= 0){
             Classes previousClass = findClassByLevel(all_class_levels[previousClassOrdinal]);
+            assignStudentToClass(student, previousClass);
             currentClass.removeStudent(student);
         }
     }
