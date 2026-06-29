@@ -4,9 +4,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // ============================================================
         // 1. CREATE THE SCHOOL
-        // ============================================================
         System.out.println("===== 1. SETUP SCHOOL =====");
         School school = new School(
                 "Kwame Nkrumah University of Science and Technology",
@@ -19,9 +17,7 @@ public class Main {
         );
         System.out.println("School: " + school.getName() + " @ " + school.getAddress());
 
-        // ============================================================
         // 2. CREATE CLASSES (one per level we care about)
-        // ============================================================
         System.out.println("\n===== 2. ADD CLASSES =====");
         Classes class1 = new Classes("CS1", ClassLevel.CLASS_1, new ArrayList<>(), false, new ArrayList<>());
         Classes class2 = new Classes("CS2", ClassLevel.CLASS_2, new ArrayList<>(), false, new ArrayList<>());
@@ -46,9 +42,7 @@ public class Main {
         Classes found = school.findClassByLevel(ClassLevel.CLASS_2);
         System.out.println("findClassByLevel(CLASS_2) -> " + (found != null ? found.getClassID() : "null"));
 
-//      ============================================================
 //      3. CREATE STAFF (teaching + non-teaching)
-//      ============================================================
         System.out.println("\n===== 3. ADD STAFF =====");
         TeachingStaff teacher1 = new TeachingStaff(
                 100, "Ada", "Lovelace", "1990-12-10",
@@ -69,9 +63,8 @@ public class Main {
         System.out.println("Teaching dept: " + teacher1.getDepartment() + ", salary: GHS" + teacher1.getSalary());
         System.out.println("Teaching dept: " + teacher2.getDepartment() + ", salary: GHS" + teacher2.getSalary());
         System.out.println("Janitor : " + janitor.getFirstName() +", salary: " + janitor.getSalary());
-        // ============================================================
+
         // 4. CREATE COURSES
-        // ============================================================
         //Used my actual course registration slip
         System.out.println("\n===== 4. CREATE COURSES =====");
         Course Calculus_II = new Course(3, null, "Calculus II", "MATH172");
@@ -88,9 +81,8 @@ public class Main {
         System.out.println("Created course: " + Discrete_Mathematics_For_Computer_Science_II.getCode() + ", " + Discrete_Mathematics_For_Computer_Science_II.getCode());
         System.out.println("Created course: " + Programming_With_C.getCode() + ", " + Programming_With_C.getCode());
         System.out.println("Created course: " + Information_Technology_II.getCode() + ", " + Information_Technology_II.getCode());
-//        // ============================================================
-//        // 5. APPLICATIONS + REVIEW (tests Applicant + reviewApplication)
-//        // ============================================================
+
+        // 5. APPLICATIONS + REVIEW (tests Applicant + reviewApplication)
         System.out.println("\n===== 5. APPLICATIONS =====");
         Applicant Smart = new Applicant(1, "Smart", "Ocquaye", "2007-05-02",
                 ClassLevel.CLASS_1, "Aggrey Memorial SHS", 4.5, LocalDate.now(), false, null);
@@ -109,9 +101,7 @@ public class Main {
         System.out.println("Bruce's status:   " + Bruce.getApplicantStatus());
         System.out.println("Caroline's status: " + Caroline.getApplicantStatus());
 
-//        // ============================================================
-        // 6. ADMIT + ENROLL + PLACE IN CLASS
-        // ============================================================
+        //6. ADMIT + ENROLL + PLACE IN CLASS
         System.out.println("\n===== 6. ADMIT & ENROLL =====");
         Student StudentSmart = school.admitEnrollAndPlaceInClass(Smart, class1);
         System.out.println("Admitted student: " + StudentSmart.getFirstName()
@@ -120,9 +110,7 @@ public class Main {
         System.out.println("Class1 size: " + class1.size() + " (expected 1)");
         System.out.println("Class1 has Smart? " + class1.hasStudent(StudentSmart)); //finally using that hasStudent boolean
 
-//        // ============================================================
-//        // 7. ASSIGN COURSES + TEACHER TO A CLASS
-//        // ============================================================
+        // 7. ASSIGN COURSES + TEACHER TO A CLASS
         System.out.println("\n===== 7. ASSIGN COURSES/TEACHER =====");
         List<Course> classCourses = new ArrayList<>();
         classCourses.add(Calculus_II);
@@ -137,9 +125,7 @@ public class Main {
         System.out.println("Calculus teacher now: " + (Calculus_II.getTeacher() != null
                 ? Calculus_II.getTeacher().getFirstName() : "null"));
 
-//        // ============================================================
-//        // 8. STUDENT ENROLL/DROP COURSES
-//        // ============================================================
+      // 8. STUDENT ENROLL/DROP COURSES
         System.out.println("\n===== 8. STUDENT COURSE ENROLLMENT =====");
         StudentSmart.enrollInCourse(Calculus_II);     // success
         StudentSmart.enrollInCourse(Programming_With_C);
@@ -151,9 +137,7 @@ public class Main {
         StudentSmart.dropCourse(Communication_Skills);      // removed
         System.out.println("Alice enrolled courses: " + StudentSmart.getEnrolledCourses().size() + " (expected 1)");
 
-//        // ============================================================
-//        // 9. FIND CURRENT CLASS + PROMOTE
-//        // ============================================================
+        // 9. FIND CURRENT CLASS + PROMOTE
         System.out.println("\n===== 9. PROMOTE =====");
         Classes current = school.findCurrentClass(StudentSmart);
         System.out.println("Smart's current class: " + (current != null ? current.getClassID() : "null"));
@@ -164,18 +148,16 @@ public class Main {
         // update the student's own classLevel field, so we sync it for further demos.
         StudentSmart.setClassLevel(ClassLevel.CLASS_2);
 
-//        // ============================================================
-//        // 10. DEMOTE
-//        // ============================================================
+
+        // 10. DEMOTE
         System.out.println("\n===== 10. DEMOTE =====");
         school.demoteStudent(StudentSmart); // CLASS_2 -> CLASS_1
         System.out.println("After demote -> Class2 size: " + class2.size()
                 + ", Class1 size: " + class1.size());
         StudentSmart.setClassLevel(ClassLevel.CLASS_1);
 
-//        // ============================================================
-//        // 11. GRADUATION (promote from the highest class level)
-//        // ============================================================
+
+        // 11. GRADUATION (promoted from the highest class level)
         System.out.println("\n===== 11. GRADUATION =====");
         Applicant grad = new Applicant(4, "Smart", "Ocquaye", "2007-05-02",
                 ClassLevel.CLASS_8, "Aggrey Memorial Zion SHS", 4.3, LocalDate.now(), false, null);
@@ -185,9 +167,8 @@ public class Main {
         System.out.println("After promote -> graduated? " + gradStudent.isHasGraduated()
                 + ", Class8 size: " + class8.size());
 
-//        // ============================================================
-//        // 12. PERSON FIELDS (inherited getters/setters) + REMOVE
-//        // ============================================================
+
+        // 12. PERSON FIELDS (inherited getters/setters) + REMOVE
         System.out.println("\n===== 12. PERSON FIELDS + REMOVE =====");
         StudentSmart.setLastName("Ocquaye(Updated)");
         System.out.println("Smart full name: " + StudentSmart.getFirstName() + " " + StudentSmart.getLastName());
