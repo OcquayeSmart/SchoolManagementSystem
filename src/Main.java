@@ -5,7 +5,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         // 1. CREATE THE SCHOOL
-        System.out.println("===== 1. SETUP SCHOOL =====");
+        System.out.println("\t\t 1. SETUP SCHOOL ");
+        System.out.println();
         School school = new School(
                 "Kwame Nkrumah University of Science and Technology",
                 "Private Mail Bag (PMB), University Post Office Kumasi, Ghana.",
@@ -18,7 +19,8 @@ public class Main {
         System.out.println("School: " + school.getName() + " @ " + school.getAddress());
 
         // 2. CREATE CLASSES (one per level)
-        System.out.println("\n===== 2. ADD CLASSES =====");
+        System.out.println("\n\t\t 2. ADD CLASSES ");
+        System.out.println();
         Classes class1 = new Classes("CS1", ClassLevel.CLASS_1, new ArrayList<>(), false, new ArrayList<>());
         Classes class2 = new Classes("CS2", ClassLevel.CLASS_2, new ArrayList<>(), false, new ArrayList<>());
         Classes class3 = new Classes("CS3", ClassLevel.CLASS_3, new ArrayList<>(), false, new ArrayList<>());
@@ -43,7 +45,8 @@ public class Main {
         System.out.println("findClassByLevel(CLASS_2) -> " + (found != null ? found.getClassID() : "null"));
 
 //      3. CREATE STAFF (teaching + non-teaching)
-        System.out.println("\n===== 3. ADD STAFF =====");
+        System.out.println("\n\t\t 3. ADD STAFF ");
+        System.out.println();
         TeachingStaff teacher1 = new TeachingStaff(
                 100, "Ada", "Lovelace", "1990-12-10",
                 "T-100", 6900.00, "Lecturer",
@@ -66,7 +69,8 @@ public class Main {
 
         // 4. CREATE COURSES
         //Used my actual course registration slip
-        System.out.println("\n===== 4. CREATE COURSES =====");
+        System.out.println("\n\t\t 4. CREATE COURSES ");
+        System.out.println();
         Course Calculus_II = new Course(3, null, "Calculus II", "MATH172");
         Course Communication_Skills = new Course(2, null, "Communication Skills", "ENGL158");
         Course Probability_and_Statistics_I = new Course(3, null, "Probability And Statistics I", "STAT166");
@@ -83,7 +87,8 @@ public class Main {
         System.out.println("Created course: " + Information_Technology_II.getCode() + ", " + Information_Technology_II.getCode());
 
         // 5. APPLICATIONS + REVIEW (tests Applicant + reviewApplication)
-        System.out.println("\n===== 5. APPLICATIONS =====");
+        System.out.println("\n\t\t 5. APPLICATIONS ");
+        System.out.println();
         Applicant Smart = new Applicant(1, "Smart", "Ocquaye", "2007-05-02",
                 ClassLevel.CLASS_1, "Aggrey Memorial SHS", 4.5, LocalDate.now(), false, null);
         Applicant Bruce = new Applicant(2, "Bruce", "Lamptey", "2008-06-15",
@@ -102,7 +107,8 @@ public class Main {
         System.out.println("Caroline's status: " + Caroline.getApplicantStatus());
 
         //6. ADMIT + ENROLL + PLACE IN CLASS
-        System.out.println("\n===== 6. ADMIT & ENROLL =====");
+        System.out.println("\n\t\t 6. ADMIT & ENROLL ");
+        System.out.println();
         Student StudentSmart = school.admitEnrollAndPlaceInClass(Smart, class1);
         System.out.println("Admitted student: " + StudentSmart.getFirstName()
                 + " (id " + StudentSmart.getStudentID() + ")");
@@ -111,8 +117,9 @@ public class Main {
         System.out.println("Class1 has Smart? " + class1.hasStudent(StudentSmart)); //finally using that hasStudent boolean
 
         // 7. ASSIGN COURSES + TEACHER TO A CLASS
-        System.out.println("\n===== 7. ASSIGN COURSES/TEACHER =====");
+        System.out.println("\n\t\t 7. ASSIGN COURSES/TEACHER ");
         List<Course> classCourses = new ArrayList<>();
+        System.out.println();
         classCourses.add(Calculus_II);
         classCourses.add(Communication_Skills);
         classCourses.add(Discrete_Mathematics_For_Computer_Science_II);
@@ -126,7 +133,8 @@ public class Main {
                 ? Calculus_II.getTeacher().getFirstName() : "null"));
 
       // 8. STUDENT ENROLL/DROP COURSES
-        System.out.println("\n===== 8. STUDENT COURSE ENROLLMENT =====");
+        System.out.println("\n\t\t 8. STUDENT COURSE ENROLLMENT ");
+        System.out.println();
         StudentSmart.enrollInCourse(Calculus_II);     // success
         StudentSmart.enrollInCourse(Programming_With_C);
         StudentSmart.enrollInCourse(Probability_and_Statistics_I);
@@ -138,7 +146,8 @@ public class Main {
         System.out.println("Alice enrolled courses: " + StudentSmart.getEnrolledCourses().size() + " (expected 1)");
 
         // 9. FIND CURRENT CLASS + PROMOTE
-        System.out.println("\n===== 9. PROMOTE =====");
+        System.out.println("\n\t\t 9. PROMOTE ");
+        System.out.println();
         Classes current = school.findCurrentClass(StudentSmart);
         System.out.println("Smart's current class: " + (current != null ? current.getClassID() : "null"));
         school.promoteStudent(StudentSmart); // CLASS_1 -> CLASS_2
@@ -150,7 +159,8 @@ public class Main {
 
 
         // 10. DEMOTE
-        System.out.println("\n===== 10. DEMOTE =====");
+        System.out.println("\n\t\t 10. DEMOTE ");
+        System.out.println();
         school.demoteStudent(StudentSmart); // CLASS_2 -> CLASS_1
         System.out.println("After demote -> Class2 size: " + class2.size()
                 + ", Class1 size: " + class1.size());
@@ -158,7 +168,8 @@ public class Main {
 
 
         // 11. GRADUATION (promoted from the highest class level)
-        System.out.println("\n===== 11. GRADUATION =====");
+        System.out.println("\n\t\t 11. GRADUATION ");
+        System.out.println();
         Applicant grad = new Applicant(4, "Smart", "Ocquaye", "2007-05-02",
                 ClassLevel.CLASS_8, "Aggrey Memorial Zion SHS", 4.3, LocalDate.now(), false, null);
         Student gradStudent = school.admitEnrollAndPlaceInClass(grad, class8); //it would be nice to use the DateTimeFormatter instead
@@ -169,7 +180,8 @@ public class Main {
 
 
         // 12. PERSON FIELDS (inherited getters/setters) + REMOVE
-        System.out.println("\n===== 12. PERSON FIELDS + REMOVE =====");
+        System.out.println("\n\t\t 12. PERSON FIELDS + REMOVE ");
+        System.out.println();
         StudentSmart.setLastName("Ocquaye(Updated)");
         System.out.println("Smart full name: " + StudentSmart.getFirstName() + " " + StudentSmart.getLastName());
         System.out.println("Smart DOB: " + StudentSmart.getDateOfBirth());
@@ -178,6 +190,7 @@ public class Main {
         school.removeStaff(janitor);
         System.out.println("Students remaining after removal: " + school.getListOfStudents().size());
         System.out.println("Staff remaining after removal: " + school.getListOfStaff().size());
-        System.out.println("\n***THANK YOU***");
+        System.out.println();
+        System.out.println("\n\t\tTHANK YOU");
     }
 }
