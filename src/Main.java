@@ -17,7 +17,7 @@ public class Main {
         );
         System.out.println("School: " + school.getName() + " @ " + school.getAddress());
 
-        // 2. CREATE CLASSES (one per level we care about)
+        // 2. CREATE CLASSES (one per level)
         System.out.println("\n===== 2. ADD CLASSES =====");
         Classes class1 = new Classes("CS1", ClassLevel.CLASS_1, new ArrayList<>(), false, new ArrayList<>());
         Classes class2 = new Classes("CS2", ClassLevel.CLASS_2, new ArrayList<>(), false, new ArrayList<>());
