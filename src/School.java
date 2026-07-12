@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class School {
@@ -60,6 +61,18 @@ public class School {
                 System.out.println("loading teacher role menu");
             }
         }
+    }
+
+    public void createUserAccount(Person person, Role role){
+        Random random = new Random();
+        int uniqueNumber = random.nextInt(10, 100);
+        String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String randomString = new java.util.Random().ints(10, 0, ALPHABET.length())
+                .mapToObj(ALPHABET::charAt)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString() + uniqueNumber;
+        String defaultPassword = "pass123";
+        User user = new User(randomString, defaultPassword, role, person);
     }
 
     public void receiveApplication(Applicant applicant) {
