@@ -4,6 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class School {
+    private final Scanner scanner = new Scanner(System.in);
     private final String name;
     private final String address;
     private final List<User> users = new ArrayList<>();
@@ -26,7 +27,6 @@ public class School {
 
     //creating my unique methods here
     public User login(){
-        Scanner scanner = new Scanner(System.in);
         while(true){
             System.out.println("Welcome back! Please enter your credentials.");
             System.out.println("-----------------------------");
@@ -65,14 +65,17 @@ public class School {
 
     public void createUserAccount(Person person, Role role){
         Random random = new Random();
-        int uniqueNumber = random.nextInt(10, 100);
-        String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-        String randomString = new java.util.Random().ints(10, 0, ALPHABET.length())
-                .mapToObj(ALPHABET::charAt)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString() + uniqueNumber;
+        int uniqueNumber = random.nextInt(10, 99);
+//        String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+//        String randomString = new java.util.Random().ints(10, 0, ALPHABET.length())
+//                .mapToObj(ALPHABET::charAt)
+//                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+//                .toString() + uniqueNumber;
+        String randomString = person.getFirstName().toLowerCase() + uniqueNumber;
         String defaultPassword = "pass123";
-        User user = new User(randomString, defaultPassword, role, person);
+        User newUser = new User(randomString, defaultPassword, role, person);
+        users.add(newUser);
+        System.out.println("Username: " + randomString + "\nPassword: " + defaultPassword);
     }
 
     public void receiveApplication(Applicant applicant) {
