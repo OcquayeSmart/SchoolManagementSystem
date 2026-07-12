@@ -13,6 +13,7 @@ public class School {
     private final List<TeachingStaff> listOfTeachingStaff;
     private final List<Course> listOfCourses;
     private final List<Staff> listOfStaff;
+    private final List<Applicant> rejectedApplicants = new ArrayList<>();
 
     public School(String name, String address) {
         users.add(new User("admin", "admin123", Role.ADMIN, null));
@@ -93,6 +94,7 @@ public class School {
             System.out.println("Application accepted");
         } else {
             applicant.setApplicantStatus(ApplicationStatus.REJECTED);
+            rejectedApplicants.add(applicant);
             System.out.println("Application rejected");
         }
     }
