@@ -1,26 +1,67 @@
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class School {
     private final String name;
     private final String address;
+    private final List<User> users = new ArrayList<>();
     private final List<Student> listOfStudents;
     private final List<Classes> listOfClasses;
     private final List<TeachingStaff> listOfTeachingStaff;
     private final List<Course> listOfCourses;
     private final List<Staff> listOfStaff;
 
-    public School(String name, String address, List<Student> listOfStudents, List<Classes> listOfClasses,
-                  List<TeachingStaff> listOfTeachingStaff, List<Course> listOfCourses, List<Staff> listOfStaff) {
+    public School(String name, String address) {
+        users.add(new User("admin", "admin123", Role.ADMIN, null));
         this.name = name;
         this.address = address;
-        this.listOfStaff = listOfStaff;
-        this.listOfStudents = listOfStudents;
-        this.listOfClasses = listOfClasses;
-        this.listOfTeachingStaff = listOfTeachingStaff;
-        this.listOfCourses = listOfCourses;
+        this.listOfStaff = new ArrayList<>();
+        this.listOfStudents = new ArrayList<>();
+        this.listOfClasses = new ArrayList<>();
+        this.listOfTeachingStaff = new ArrayList<>();
+        this.listOfCourses = new ArrayList<>();
     }
 
     //creating my unique methods here
+    public User login(){
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            System.out.println("Welcome back! Please enter your credentials.");
+            System.out.println("-----------------------------");
+            System.out.print("Username: ");
+            String username = scanner.nextLine();
+            System.out.print("Password: ");
+            String password = scanner.nextLine();
+            System.out.println("-----------------------------");
+            System.out.println("\nStatus: Verifying Credentials...");
+            for(User user: users){
+                if(user.getPassword().equals(password) && user.getUsername().equals(username)){
+                    System.out.println("Staus: Access Granted!");
+                    return user;
+                }
+            }
+            System.out.println("\nInvalid Credentials. Try again\n");
+        }
+    }
+    public void run(){
+        User CurrentUser = login();
+        switch(CurrentUser.getRole()){
+            case ADMIN -> {
+                System.out.println("Welcome " + CurrentUser.getUsername());
+                System.out.println("Loading admin role menu");
+            }
+            case STUDENT -> {
+                System.out.println("Welcome " + CurrentUser.getUsername());
+                System.out.println("Loading student role menu");
+            }
+            case TEACHER -> {
+                System.out.println("Welcome " + CurrentUser.getUsername());
+                System.out.println("loading teacher role menu");
+            }
+        }
+    }
+
     public void receiveApplication(Applicant applicant) {
         System.out.println(applicant.getFirstName()+" "+applicant.getLastName() + "'s application has been received" );
     }
