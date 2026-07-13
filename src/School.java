@@ -8,17 +8,19 @@ public class School {
     private final Scanner scanner = new Scanner(System.in);
     private final String name;
     private final String address;
-    private final List<User> users = new ArrayList<>();
+    private final List<User> users;
     private final List<Student> listOfStudents;
     private final List<Classes> listOfClasses;
     private final List<TeachingStaff> listOfTeachingStaff;
     private final List<Course> listOfCourses;
     private final List<Staff> listOfStaff;
     private final List<Applicant> applicants;
-    private final List<Applicant> rejectedApplicants = new ArrayList<>();
+    private final List<Applicant> rejectedApplicants;
 
     public School(String name, String address) {
+        this.rejectedApplicants = new ArrayList<>();
         this.applicants = new ArrayList<>();
+        this.users = new ArrayList<>();
         users.add(new User("admin", "admin123", Role.ADMIN, null));
         this.name = name;
         this.address = address;
@@ -84,12 +86,12 @@ public class School {
             int userInput = scanner.nextInt();
             scanner.nextLine();
             switch(userInput){
-                case 1 -> viewTeacherDetails();
-                case 2 -> viewMyCourses();
-                case 3 -> viewStudentsInMyCourse();
+                case 1 -> viewTeacherDetails(currentUser);
+                case 2 -> viewMyCourses(currentUser);
+                case 3 -> viewStudentsInMyCourse(currentUser);
                 case 0 -> {System.out.println("Logged out");
                     isRunning = false;
-                run();}
+                    run();}
                 default -> System.out.println("Invalid choice. Please try again");
             }
         }
@@ -112,12 +114,12 @@ public class School {
             int userInput = scanner.nextInt();
             scanner.nextLine();
             switch(userInput){
-                case 1 -> viewMyDetails();
-                case 2 -> viewMyEnrolledCourses();
-                case 3 -> viewMyClass();
+                case 1 -> viewMyDetails(currentUser);
+                case 2 -> viewMyEnrolledCourses(currentUser);
+                case 3 -> viewMyClass(currentUser);
                 case 4 -> {System.out.println("Logged out");
                     isRunning = false;
-                run();}
+                    run();}
                 default -> System.out.println("Invalid choice. Please try again");
             }
         }
@@ -236,61 +238,143 @@ public class School {
 
     }
     private void viewRejectedApplications(){
-
+        int myNumber = 1;
+        System.out.println("========================================");
+        System.out.println("       Rejected Applicant list");
+        System.out.println();
+        for(Applicant applicant:rejectedApplicants){
+            System.out.println("\tFirst name \tLast name \tDate of birth \t Previous school \t Previous GPA \t Application status");
+            System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t" + applicant.getPreviousSchool() + " \t" + applicant.getPreviousGPA() + " \t" + applicant.getApplicantStatus());
+            myNumber++;
+        }
+        System.out.println("========================================");
     }
     private void viewAllStudents(){
-
+        int myNumber = 1;
+        System.out.println("========================================");
+        System.out.println("             Student list");
+        System.out.println();
+        for(Student student:listOfStudents){
+            System.out.println("\tFirst name \tLast name \tDate of birth");
+            System.out.println(myNumber + ". \t" + student.getFirstName() + " \t" + student.getLastName() + " \t" + student.getDateOfBirth());
+            myNumber++;
+        }
+        System.out.println("========================================");
     }
     private void addTeachingStaff(){
+        System.out.println("========================================");
+        System.out.println("        REGISTER NEW TEACHER          ");
+        System.out.println("========================================");
 
+        System.out.print("First Name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Last Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Date of Birth (YYYY-MM-DD): ");
+        String dateOfBirth = scanner.nextLine();
+
+        System.out.println("Teacher's Salary(GHS): ");
+        double salary = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.println("Select desired ");
+        Department[] departments = Department.values();
+        for(int i = 0; i < departments.length; i++){
+            System.out.println(i + 1 + ". " + departments[i]);
+        }
+        System.out.print("Enter number: ");
+        int departmentChoice = Integer.parseInt(scanner.nextLine());
+        Department department = departments[departmentChoice - 1];
+
+        int id = listOfTeachingStaff.size() + 1;
+
+        String staffID = firstName + id;
+
+        TeachingStaff teachingStaff = new TeachingStaff(id, firstName, lastName, dateOfBirth, staffID, salary, Role.TEACHER.name(), listOfCourses, department);
+        System.out.println();
+
+        addStaff(teachingStaff);
+        createUserAccount(teachingStaff, Role.TEACHER);
+
+        System.out.println("========================================");
+        System.out.println("    Teacher registered successfully   ");
+        System.out.println("========================================");
     }
-    private void addaNonTeachingStaff(){
-
+    private void addaNonTeachingStaff() {
     }
     private void viewAllStaff(){
-
-    }
+        int myNumber = 1;
+        System.out.println("========================================");
+        System.out.println("             Staff list");
+        System.out.println();
+        for(Staff staff:listOfStaff){
+            System.out.println("\tFirst name \tLast name \tDate of birth");
+            System.out.println(myNumber + ". \t" + staff.getFirstName() + " \t" + staff.getLastName() + " \t" + staff.getDateOfBirth());
+            myNumber++;
+        }
+        System.out.println("========================================");
+        }
     private void addCourse(){
 
     }
     private void viewAllCourses(){
-
+        int myNumber = 1;
+        System.out.println("========================================");
+        System.out.println("            List of courses");
+        System.out.println();
+        for(Course course:listOfCourses){
+            System.out.println("\tCourse code \tTitle \tCredit hours");
+            System.out.println(myNumber + ". \t" + course.getCode() + " \t" + course.getTitle() + " \t" + course.getCreditUnits());
+            myNumber++;
+        }
+        System.out.println("========================================");
     }
     private void addClass(){
 
     }
     private void viewAllClasses(){
-
+        int myNumber = 1;
+        System.out.println("========================================");
+        System.out.println("            List of Classes");
+        System.out.println();
+        for(Classes classes:listOfClasses){
+            System.out.println("\tClass ID \tClass Level \tClass size");
+            System.out.println(myNumber + ". \t" + classes.getClassID() + " \t" + classes.getClassLevel() + " \t" + classes.size());
+            myNumber++;
+        }
+        System.out.println("========================================");
     }
     //STUDENT
-    private void viewMyDetails(){
+    private void viewMyDetails(User user){
 
     }
-    private void viewMyEnrolledCourses(){
+    private void viewMyEnrolledCourses(User user){
 
     }
-    private void viewMyClass(){
+    private void viewMyClass(User user){
 
     }
     //TEACHER
-    private void viewTeacherDetails(){
+    private void viewTeacherDetails(User user){
 
     }
-    private void viewMyCourses(){
+    private void viewMyCourses(User user){
 
     }
-    private void viewStudentsInMyCourse(){
+    private void viewStudentsInMyCourse(User user){
 
     }
     //========================================================================
     public void createUserAccount(Person person, Role role){
         Random random = new Random();
         int uniqueNumber = random.nextInt(10, 99);
-//        String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-//        String randomString = new java.util.Random().ints(10, 0, ALPHABET.length())
-//                .mapToObj(ALPHABET::charAt)
-//                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-//                .toString() + uniqueNumber;
+    //        String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    //        String randomString = new java.util.Random().ints(10, 0, ALPHABET.length())
+    //                .mapToObj(ALPHABET::charAt)
+    //                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+    //                .toString() + uniqueNumber;
         String randomString = person.getFirstName().toLowerCase() + uniqueNumber;
         String defaultPassword = "pass123";
         User newUser = new User(randomString, defaultPassword, role, person);
@@ -367,7 +451,7 @@ public class School {
         classes.addStudent(student);
     }
     public Classes findCurrentClass(Student student){
-       return findClassByLevel(student.getClasslevel());
+        return findClassByLevel(student.getClasslevel());
     }
     public void promoteStudent(Student student){
         Classes currentClass = findCurrentClass(student);
