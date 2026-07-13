@@ -168,7 +168,7 @@ public class School {
         }
     }
     //========================================================================
-    //CREATING STUBS HERE
+    //CREATING STUBS HERE, they ask the user for input and calls existing methods for logic
     //ADMIN
     private void registerApplicant(){
 
