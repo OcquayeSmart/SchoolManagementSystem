@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -13,9 +14,11 @@ public class School {
     private final List<TeachingStaff> listOfTeachingStaff;
     private final List<Course> listOfCourses;
     private final List<Staff> listOfStaff;
+    private final List<Applicant> applicants;
     private final List<Applicant> rejectedApplicants = new ArrayList<>();
 
     public School(String name, String address) {
+        this.applicants = new ArrayList<>();
         users.add(new User("admin", "admin123", Role.ADMIN, null));
         this.name = name;
         this.address = address;
@@ -171,7 +174,47 @@ public class School {
     //CREATING STUBS HERE, they ask the user for input and calls existing methods for logic
     //ADMIN
     private void registerApplicant(){
+        System.out.println("========================================");
+        System.out.println("        REGISTER NEW APPLICANT          ");
+        System.out.println("========================================");
 
+        System.out.print("First Name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Last Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Date of Birth (YYYY-MM-DD): ");
+        String dateOfBirth = scanner.nextLine();
+
+        System.out.print("Previous School: ");
+        String previousSchool = scanner.nextLine();
+
+        System.out.print("Previous GPA: ");
+        double previousGPA = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Select desired Class Level");
+        ClassLevel[] levels = ClassLevel.values();
+        for(int i = 0; i < levels.length; i++){
+            System.out.println(i + 1 + ". " + levels[i]);
+        }
+        System.out.print("Enter number: ");
+        int levelChoice = Integer.parseInt(scanner.nextLine());
+        ClassLevel desiredLevel = levels[levelChoice - 1];
+
+        int id = applicants.size() + 1;
+
+        LocalDate applicationDate = LocalDate.now();
+
+        Applicant applicant = new Applicant(id, firstName, lastName, dateOfBirth, desiredLevel, previousSchool, previousGPA, applicationDate, false ,ApplicationStatus.PENDING);
+        System.out.println();
+
+        applicants.add(applicant);
+        receiveApplication(applicant);
+
+        System.out.println("    Applicant registered successfully   ");
+        System.out.println("========================================");
     }
     private void viewAllApplicants(){
 

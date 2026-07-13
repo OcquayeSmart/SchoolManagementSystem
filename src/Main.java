@@ -6,7 +6,6 @@ public class Main {
     public static void main(String[] args) {
         School school = new School("KNUST", "Kumasi, Ghana");
         school.run();
-        // 1. CREATE THE SCHOOL
 //        System.out.println("\t\t 1. SETUP SCHOOL ");
 //        System.out.println();
 //        School school = new School(
@@ -20,7 +19,7 @@ public class Main {
 //        );
 //        System.out.println("School: " + school.getName() + " @ " + school.getAddress());
 //
-//        // 2. CREATE CLASSES (one per level)
+//
 //        System.out.println("\n\t\t 2. ADD CLASSES ");
 //        System.out.println();
 //        Classes class1 = new Classes("CS1", ClassLevel.CLASS_1, new ArrayList<>(), false, new ArrayList<>());
@@ -46,7 +45,6 @@ public class Main {
 //        Classes found = school.findClassByLevel(ClassLevel.CLASS_2);
 //        System.out.println("findClassByLevel(CLASS_2) -> " + (found != null ? found.getClassID() : "null"));
 //
-////      3. CREATE STAFF (teaching + non-teaching)
 //        System.out.println("\n\t\t 3. ADD STAFF ");
 //        System.out.println();
 //        TeachingStaff teacher1 = new TeachingStaff(
