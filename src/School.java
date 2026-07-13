@@ -51,7 +51,7 @@ public class School {
         switch(CurrentUser.getRole()){
             case ADMIN -> {
                 System.out.println("Welcome " + CurrentUser.getUsername());
-                System.out.println("Loading admin role menu");
+                adminMenu();
             }
             case STUDENT -> {
                 System.out.println("Welcome " + CurrentUser.getUsername());
@@ -64,6 +64,94 @@ public class School {
         }
     }
 
+    private void adminMenu(){
+        boolean isRunning = true;
+        String adminMenu = """
+=============================
+   KNUST - ADMIN CENTER
+=============================
+1.  Register Applicant
+2.  View All Applicants
+3.  Accept Applicant
+4.  Reject Applicant
+5.  View Rejected Applicants
+6.  View all Students
+7.  Add Teaching Staff
+8.  Add Non-Teaching Staff
+9.  View All Staff
+10. Add Course
+11. View All Courses
+12. Add Class
+13. View All Classes
+0.  Logout
+=============================
+                        """;
+        System.out.println(adminMenu);
+        int userChoice = scanner.nextInt();
+        scanner.nextLine();
+        switch(userChoice){
+            case 1 -> registerApplicant();
+            case 2 -> viewAllApplicants();
+            case 3 -> acceptApplicant();
+            case 4 -> rejectApplicant();
+            case 5 -> viewRejectedApplications();
+            case 6 -> viewAllStudents();
+            case 7 -> addTeachingStaff();
+            case 8 -> addaNonTeachingStaff();
+            case 9 -> viewAllStaff();
+            case 10 -> addCourse();
+            case 11 -> viewAllCourses();
+            case 12 -> addClass();
+            case 13 -> viewAllClasses();
+            case 0 -> {
+                System.out.println("Logged out");
+                isRunning = false;
+            }
+            default -> System.out.println("Invalid choice. Please try again");
+        }
+    }
+    //========================================================================
+    //CREATING STUBS HERE
+    private void registerApplicant(){
+
+    }
+    private void viewAllApplicants(){
+
+    }
+    private void acceptApplicant(){
+
+    }
+    private void rejectApplicant(){
+
+    }
+    private void viewRejectedApplications(){
+
+    }
+    private void viewAllStudents(){
+
+    }
+    private void addTeachingStaff(){
+
+    }
+    private void addaNonTeachingStaff(){
+
+    }
+    private void viewAllStaff(){
+
+    }
+    private void addCourse(){
+
+    }
+    private void viewAllCourses(){
+
+    }
+    private void addClass(){
+
+    }
+    private void viewAllClasses(){
+
+    }
+    //========================================================================
     public void createUserAccount(Person person, Role role){
         Random random = new Random();
         int uniqueNumber = random.nextInt(10, 99);
