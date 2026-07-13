@@ -217,7 +217,17 @@ public class School {
         System.out.println("========================================");
     }
     private void viewAllApplicants(){
-
+        int myNumber = 1;
+        System.out.println("========================================");
+        System.out.println("             Applicant list             ");
+        System.out.println("========================================");
+        System.out.println();
+        for(Applicant applicant:applicants){
+            System.out.println("\tFirst name \tLast name \tDate of birth \t Previous school \t Previous GPA \t Application status");
+            System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t" + applicant.getPreviousSchool() + " \t" + applicant.getPreviousGPA() + " \t" + applicant.getApplicantStatus());
+            myNumber++;
+        }
+        System.out.println("========================================");
     }
     private void acceptApplicant(){
 
