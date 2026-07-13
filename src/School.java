@@ -27,7 +27,7 @@ public class School {
     }
 
     //creating my unique methods here
-    public User login(){
+    private User login(){
         while(true){
             System.out.println("Welcome back! Please enter your credentials.");
             System.out.println("-----------------------------");
@@ -55,15 +55,70 @@ public class School {
             }
             case STUDENT -> {
                 System.out.println("Welcome " + CurrentUser.getUsername());
-                System.out.println("Loading student role menu");
+                studentMenu(CurrentUser);
             }
             case TEACHER -> {
                 System.out.println("Welcome " + CurrentUser.getUsername());
-                System.out.println("loading teacher role menu");
+                teacherMenu(CurrentUser);
             }
         }
     }
 
+    private void teacherMenu(User currentUser){
+        boolean isRunning = true;
+        String TeacherMenu = """
+================================
+    KNUST TEACHING STAFF PORTAL
+================================
+1. View My Details
+2. View My Courses
+3. View Students In My Course
+0. Logout
+================================
+                """;
+        while(isRunning){
+            System.out.println(TeacherMenu);
+            int userInput = scanner.nextInt();
+            scanner.nextLine();
+            switch(userInput){
+                case 1 -> viewTeacherDetails();
+                case 2 -> viewMyCourses();
+                case 3 -> viewStudentsInMyCourse();
+                case 0 -> {System.out.println("Logged out");
+                    isRunning = false;
+                run();}
+                default -> System.out.println("Invalid choice. Please try again");
+            }
+        }
+    }
+
+    private void studentMenu(User currentUser){
+        boolean isRunning = true;
+        String studentMenu = """
+================================
+    KNUST STUDENT PORTAL
+================================
+1. View My Details
+2. View Enrolled Courses
+3. View Class Information
+0. Logout
+================================
+                """;
+        while(isRunning){
+            System.out.println(studentMenu);
+            int userInput = scanner.nextInt();
+            scanner.nextLine();
+            switch(userInput){
+                case 1 -> viewMyDetails();
+                case 2 -> viewMyEnrolledCourses();
+                case 3 -> viewMyClass();
+                case 4 -> {System.out.println("Logged out");
+                    isRunning = false;
+                run();}
+                default -> System.out.println("Invalid choice. Please try again");
+            }
+        }
+    }
     private void adminMenu(){
         boolean isRunning = true;
         String adminMenu = """
@@ -86,32 +141,35 @@ public class School {
 0.  Logout
 =============================
                         """;
-        System.out.println(adminMenu);
-        int userChoice = scanner.nextInt();
-        scanner.nextLine();
-        switch(userChoice){
-            case 1 -> registerApplicant();
-            case 2 -> viewAllApplicants();
-            case 3 -> acceptApplicant();
-            case 4 -> rejectApplicant();
-            case 5 -> viewRejectedApplications();
-            case 6 -> viewAllStudents();
-            case 7 -> addTeachingStaff();
-            case 8 -> addaNonTeachingStaff();
-            case 9 -> viewAllStaff();
-            case 10 -> addCourse();
-            case 11 -> viewAllCourses();
-            case 12 -> addClass();
-            case 13 -> viewAllClasses();
-            case 0 -> {
-                System.out.println("Logged out");
-                isRunning = false;
+        while(isRunning){
+            System.out.println(adminMenu);
+            int userChoice = scanner.nextInt();
+            scanner.nextLine();
+            switch(userChoice){
+                case 1 -> registerApplicant();
+                case 2 -> viewAllApplicants();
+                case 3 -> acceptApplicant();
+                case 4 -> rejectApplicant();
+                case 5 -> viewRejectedApplications();
+                case 6 -> viewAllStudents();
+                case 7 -> addTeachingStaff();
+                case 8 -> addaNonTeachingStaff();
+                case 9 -> viewAllStaff();
+                case 10 -> addCourse();
+                case 11 -> viewAllCourses();
+                case 12 -> addClass();
+                case 13 -> viewAllClasses();
+                case 0 -> {
+                    System.out.println("Logged out");
+                    isRunning = false;
+                }
+                default -> System.out.println("Invalid choice. Please try again");
             }
-            default -> System.out.println("Invalid choice. Please try again");
         }
     }
     //========================================================================
     //CREATING STUBS HERE
+    //ADMIN
     private void registerApplicant(){
 
     }
@@ -149,6 +207,26 @@ public class School {
 
     }
     private void viewAllClasses(){
+
+    }
+    //STUDENT
+    private void viewMyDetails(){
+
+    }
+    private void viewMyEnrolledCourses(){
+
+    }
+    private void viewMyClass(){
+
+    }
+    //TEACHER
+    private void viewTeacherDetails(){
+
+    }
+    private void viewMyCourses(){
+
+    }
+    private void viewStudentsInMyCourse(){
 
     }
     //========================================================================
