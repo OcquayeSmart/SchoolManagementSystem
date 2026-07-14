@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -297,9 +298,50 @@ public class School {
         System.out.println("Student accepted and enrolled successfully");
         System.out.println("==========================================");
     }
-    private void rejectApplicant(){
 
+    private void rejectApplicant(){
+        System.out.println("========================================");
+        System.out.println("           REJECT APPLICATION           ");
+        System.out.println("========================================");
+        System.out.println();
+
+        if(applicants.isEmpty()){
+            System.out.println("No applicants in the system");
+            return;
+        }
+
+        viewAllApplicants();
+
+        System.out.print("Applicant first name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Applicant last name: ");
+        String lastName = scanner.nextLine();
+
+        Applicant found = null;
+
+        for(Applicant applicant:applicants){
+            if (applicant.getFirstName().equalsIgnoreCase(firstName) && applicant.getLastName().equalsIgnoreCase(lastName)){
+                System.out.println("\rSearching for applicant");
+                System.out.println("\rApplicant found");
+                found = applicant;
+                reviewApplication(applicant);
+                if(applicant.getApplicantStatus() != ApplicationStatus.ACCEPTED){
+                    System.out.println("Does not meet our requirements");
+                    applicants.remove(found);
+                    return;
+                }
+            }
+        }
+        if(found == null){
+            System.out.println("Application not found");
+            return;
+        }
+
+        System.out.println("     Student rejected successfully");
+        System.out.println("==========================================");
     }
+
     private void viewRejectedApplications(){
         int myNumber = 1;
         System.out.println("========================================");
@@ -371,6 +413,40 @@ public class School {
     }
 
     private void addaNonTeachingStaff() {
+        System.out.println("========================================");
+        System.out.println("     REGISTER NEW NON TEACHING STAFF    ");
+        System.out.println("========================================");
+
+        System.out.print("First Name: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Last Name: ");
+        String lastName = scanner.nextLine();
+
+        System.out.print("Date of Birth (YYYY-MM-DD): ");
+        String dateOfBirth = scanner.nextLine();
+
+        System.out.print("Salary(GHS): ");
+        double salary = scanner.nextDouble();
+        scanner.nextLine();
+
+        System.out.print("Job title: ");
+        String jobTitle = scanner.nextLine();
+
+        System.out.print("Staff role: ");
+        String role = scanner.nextLine();
+
+        int id = listOfTeachingStaff.size() + 1;
+
+        String staffID = firstName + id;
+
+        NonTeachingStaff nonteachingStaff = new NonTeachingStaff(id, firstName, lastName, dateOfBirth, staffID, salary, Role.TEACHER.name(), jobTitle);
+        System.out.println();
+
+        addStaff(nonteachingStaff);
+
+        System.out.println("    Non teaching staff registered successfully   ");
+        System.out.println("========================================");
     }
 
     private void viewAllStaff(){
@@ -388,7 +464,24 @@ public class School {
         }
 
     private void addCourse(){
+        System.out.println("========================================");
+        System.out.println("               Add courses             ");
+        System.out.println("========================================");
+        System.out.println();
 
+        System.out.println("Course code: ");
+        String courseCode = scanner.nextLine();
+
+        System.out.println("Course title: ");
+        String courseTitle = scanner.nextLine();
+
+        System.out.println("Credit Units(hr): ");
+        int creditUnits = scanner.nextInt();
+
+        Course course = new Course(creditUnits, null, courseTitle, courseCode);
+        listOfCourses.add(course);
+
+        System.out.println("Course added successfully");
     }
 
     private void viewAllCourses(){
@@ -406,7 +499,27 @@ public class School {
     }
 
     private void addClass(){
+        int myNumber = 1;
+        System.out.println("List of Classes");
+        System.out.println();
+        System.out.println("\tClass ID \tClass Level \tClass size");
+        ClassLevel[] classLevel = ClassLevel.values();
+        for(int i = 0; i < classLevel.length; i++){
+            System.out.println(i + 1 + ". " + classLevel[i]);
+            myNumber++;
+        }
 
+        System.out.println("Select desired ");
+        int classLevelChoice = Integer.parseInt(scanner.nextLine());
+        ClassLevel level = classLevel[classLevelChoice - 1];
+
+        System.out.println("Class ID: ");
+        String classID = scanner.nextLine();
+
+        Classes classes = new Classes(classID, level, new ArrayList<>(), false, new ArrayList<>());
+        addClass(classes);
+        System.out.println("========================");
+        System.out.println("Class added successfully");
     }
 
     private void viewAllClasses(){
@@ -422,16 +535,29 @@ public class School {
         }
         System.out.println("========================================");
     }
+
     //STUDENT
     private void viewMyDetails(User user){
-
+        Student student = (Student) user.getProfile();
+        System.out.println("Name: " + student.getFirstName() + " " + student.getLastName());
+        System.out.println("Student ID: " + student.getStudentID());
+        System.out.println("Date Of Birth: " + student.getDateOfBirth());
+        System.out.println("Class level: " + student.getClasslevel());
+        System.out.println("Graduated: " + student.isHasGraduated());
     }
 
     private void viewMyEnrolledCourses(User user){
-
+        int myNumber = 1;
+        Student student = (Student) user.getProfile();
+        for(Course course: student.getEnrolledCourses()){
+            System.out.println(myNumber + ". " + course);
+            myNumber++;
+        }
     }
 
     private void viewMyClass(User user){
+        Student student = (Student) user.getProfile();
+        findCurrentClass(student);
 
     }
     //TEACHER
@@ -483,9 +609,9 @@ public class School {
     }
 
     public Classes findClassByLevel(ClassLevel level){
-        for(Classes clas:listOfClasses){
-            if(clas.getClassLevel() == level){
-                return clas;
+        for(Classes classes:listOfClasses){
+            if(classes.getClassLevel() == level){
+                return classes;
             }
         }
         return null;
