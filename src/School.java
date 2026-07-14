@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +31,7 @@ public class School {
         this.listOfCourses = new ArrayList<>();
     }
 
-    private User login(){
+    private User login() throws InterruptedException {
         while(true){
             System.out.println("Welcome back! Please enter your credentials.");
             System.out.println("-----------------------------");
@@ -41,37 +40,39 @@ public class School {
             System.out.print("Password: ");
             String password = scanner.nextLine();
             System.out.println("-----------------------------");
-            System.out.println("\nStatus: Verifying Credentials...");
+            System.out.print("\n\rStatus: Verifying Credentials...");
+            Thread.sleep(1600);
             for(User user: users){
                 if(user.getPassword().equals(password) && user.getUsername().equals(username)){
-                    System.out.println("Staus: Access Granted!");
+                    System.out.print("\rStatus: Access Granted!");
                     return user;
                 }
             }
             System.out.println("\nInvalid Credentials. Try again\n");
         }
     }
-    public void run(){
+    public void run() throws InterruptedException{
         User CurrentUser = login();
         switch(CurrentUser.getRole()){
             case ADMIN -> {
-                System.out.println("Welcome " + CurrentUser.getUsername());
+                System.out.println("\nWelcome " + CurrentUser.getUsername());
                 adminMenu();
             }
             case STUDENT -> {
-                System.out.println("Welcome " + CurrentUser.getUsername());
+                System.out.println("\nWelcome " + CurrentUser.getUsername());
                 studentMenu(CurrentUser);
             }
             case TEACHER -> {
-                System.out.println("Welcome " + CurrentUser.getUsername());
+                System.out.println("\nWelcome " + CurrentUser.getUsername());
                 teacherMenu(CurrentUser);
             }
         }
     }
 
-    private void teacherMenu(User currentUser){
+    private void teacherMenu(User currentUser) throws InterruptedException {
         boolean isRunning = true;
         String TeacherMenu = """
+
 ================================
     KNUST TEACHING STAFF PORTAL
 ================================
@@ -97,9 +98,10 @@ public class School {
         }
     }
 
-    private void studentMenu(User currentUser){
+    private void studentMenu(User currentUser) throws InterruptedException {
         boolean isRunning = true;
         String studentMenu = """
+
 ================================
     KNUST STUDENT PORTAL
 ================================
@@ -127,6 +129,7 @@ public class School {
     private void adminMenu(){
         boolean isRunning = true;
         String adminMenu = """
+
 =============================
    KNUST - ADMIN CENTER
 =============================
@@ -226,6 +229,12 @@ public class School {
         System.out.println("             Applicant list             ");
         System.out.println("========================================");
         System.out.println();
+
+        if (applicants.isEmpty()){
+            System.out.println("No applicants found");
+            return;
+        }
+
         System.out.println("\tFirst name \tLast name \tDate of birth \t Previous school \t Previous GPA \t Application status");
         for(Applicant applicant:applicants){
             System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t" + applicant.getPreviousSchool() + " \t" + applicant.getPreviousGPA() + " \t" + applicant.getApplicantStatus());
@@ -344,9 +353,14 @@ public class School {
     private void viewRejectedApplications(){
         int myNumber = 1;
         System.out.println("========================================");
-        System.out.println("       Rejected Applicant list          ");
+        System.out.println("         Rejected Applicant list        ");
         System.out.println("========================================");
         System.out.println();
+
+        if(rejectedApplicants.isEmpty()){
+            System.out.println("No applicants rejected");
+            return;
+        }
         System.out.println("\tFirst name \tLast name \tDate of birth \t Previous school \t Previous GPA \t Application status");
         for(Applicant applicant:rejectedApplicants){
             System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t" + applicant.getPreviousSchool() + " \t" + applicant.getPreviousGPA() + " \t" + applicant.getApplicantStatus());
@@ -363,6 +377,9 @@ public class School {
         System.out.println();
         System.out.println("\tFirst name \tLast name \tDate of birth");
 
+        if(listOfStudents.isEmpty()){
+            System.out.println("No student available");
+        }
         for(Student student:listOfStudents){
             System.out.println(myNumber + ". \t" + student.getFirstName() + " \t" + student.getLastName() + " \t" + student.getDateOfBirth());
             myNumber++;
@@ -372,7 +389,7 @@ public class School {
 
     private void addTeachingStaff(){
         System.out.println("========================================");
-        System.out.println("        REGISTER NEW TEACHER          ");
+        System.out.println("          REGISTER NEW TEACHER          ");
         System.out.println("========================================");
 
         System.out.print("First Name: ");
@@ -407,7 +424,7 @@ public class School {
         addStaff(teachingStaff);
         createUserAccount(teachingStaff, Role.TEACHER);
 
-        System.out.println("    Teacher registered successfully   ");
+        System.out.println("     Teacher registered successfully    ");
         System.out.println("========================================");
     }
 
@@ -445,7 +462,7 @@ public class School {
         addStaff(nonteachingStaff);
 
         System.out.println("    Non teaching staff registered successfully   ");
-        System.out.println("========================================");
+        System.out.println("=================================================");
     }
 
     private void viewAllStaff(){
@@ -454,6 +471,11 @@ public class School {
         System.out.println("             Staff list                 ");
         System.out.println("========================================");
         System.out.println();
+
+        if(listOfStaff.isEmpty()){
+            System.out.println("No staff members available");
+            return;
+        }
         System.out.println("\tFirst name \tLast name \tDate of birth");
         for(Staff staff:listOfStaff){
             System.out.println(myNumber + ". \t" + staff.getFirstName() + " \t" + staff.getLastName() + " \t" + staff.getDateOfBirth());
@@ -490,6 +512,11 @@ public class School {
         System.out.println("            List of courses             ");
         System.out.println("========================================");
         System.out.println();
+
+        if(listOfCourses.isEmpty()){
+            System.out.println("No courses available");
+            return;
+        }
         System.out.println("\tCourse code \tTitle \tCredit hours");
         for(Course course:listOfCourses){
             System.out.println(myNumber + ". \t" + course.getCode() + " \t" + course.getTitle() + " \t" + course.getCreditUnits());
@@ -527,6 +554,12 @@ public class School {
         System.out.println("            List of Classes             ");
         System.out.println("========================================");
         System.out.println();
+
+        if(listOfClasses.isEmpty()){
+            System.out.println("No classes available");
+            return;
+        }
+
         System.out.println("\tClass ID \tClass Level \tClass size");
         for(Classes classes:listOfClasses){
             System.out.println(myNumber + ". \t" + classes.getClassID() + " \t" + classes.getClassLevel() + " \t" + classes.size());

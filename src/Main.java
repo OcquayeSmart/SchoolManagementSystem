@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException{
         School school = new School("KNUST", "Kumasi, Ghana");
         school.run();
 //        System.out.println("\t\t 1. SETUP SCHOOL ");
