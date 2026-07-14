@@ -126,7 +126,7 @@ public class School {
             }
         }
     }
-    private void adminMenu(){
+    private void adminMenu() throws InterruptedException {
         boolean isRunning = true;
         String adminMenu = """
 
@@ -243,7 +243,7 @@ public class School {
         System.out.println("========================================");
     }
 
-    private void acceptApplicant(){
+    private void acceptApplicant() throws InterruptedException {
         System.out.println("========================================");
         System.out.println("         ACCEPTING APPLICANT");
         System.out.println("========================================");
@@ -267,6 +267,7 @@ public class School {
         for(Applicant applicant:applicants){
             if (applicant.getFirstName().equalsIgnoreCase(firstName) && applicant.getLastName().equalsIgnoreCase(lastName)){
                 System.out.println("\rSearching for applicant");
+                Thread.sleep(1000);
                 System.out.println("\rApplicant found");
                 found = applicant;
                 break;
@@ -305,6 +306,7 @@ public class School {
 
         Student newStudent = admitEnrollAndPlaceInClass(found, startingClass);
         createUserAccount(newStudent, Role.STUDENT);
+        applicants.remove(found);
 
         System.out.println("Student accepted and enrolled successfully");
         System.out.println("==========================================");
@@ -422,6 +424,7 @@ public class School {
         System.out.println();
 
         addStaff(teachingStaff);
+        listOfTeachingStaff.add(teachingStaff);
         createUserAccount(teachingStaff, Role.TEACHER);
 
         System.out.println("     Teacher registered successfully    ");
@@ -526,13 +529,11 @@ public class School {
     }
 
     private void addClass(){
-        int myNumber = 1;
         System.out.println("List of Classes");
         System.out.println();
         ClassLevel[] classLevel = ClassLevel.values();
         for(int i = 0; i < classLevel.length; i++){
             System.out.println(i + 1 + ". " + classLevel[i]);
-            myNumber++;
         }
 
         System.out.println("Select desired ");
@@ -588,9 +589,27 @@ public class School {
     }
 
     private void viewMyClass(User user){
+        int myNumber = 1;
         Student student = (Student) user.getProfile();
         Classes currentClass = findCurrentClass(student);
-        System.out.println("Class level: " + currentClass.getClassLevel() + " Class ID: " + currentClass.getClassID() + " Class courses: " + currentClass.getCourses());
+
+        if(currentClass == null){
+            System.out.println("You are not assigned to any class yet.");
+            return;
+        }
+
+        System.out.println("Class ID: " + currentClass.getClassID());
+        System.out.println("Class Level: " + currentClass.getClassLevel());
+        System.out.println("Number of students: " + currentClass.size());
+        System.out.println("\nCourses in this class:");
+        if(currentClass.getCourses().isEmpty()){
+            System.out.println("No courses assigned yet.");
+        } else {
+            for(Course course : currentClass.getCourses()){
+                System.out.println(myNumber + ". " +course.getCode() + " " + course.getTitle());
+                myNumber++;
+            }
+        }
     }
     //TEACHER
     private void viewTeacherDetails(User user){
