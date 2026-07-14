@@ -31,7 +31,7 @@ public class School {
         this.listOfCourses = new ArrayList<>();
     }
 
-    private User login() throws InterruptedException {
+    private User login() {
         while(true){
             System.out.println("Welcome back! Please enter your credentials.");
             System.out.println("-----------------------------");
@@ -41,7 +41,12 @@ public class School {
             String password = scanner.nextLine();
             System.out.println("-----------------------------");
             System.out.print("\n\rStatus: Verifying Credentials...");
-            Thread.sleep(1600);
+            try{
+                Thread.sleep(1600);
+            }
+            catch(InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
             for(User user: users){
                 if(user.getPassword().equals(password) && user.getUsername().equals(username)){
                     System.out.print("\rStatus: Access Granted!");
@@ -51,7 +56,7 @@ public class School {
             System.out.println("\nInvalid Credentials. Try again\n");
         }
     }
-    public void run() throws InterruptedException{
+    public void run(){
         User CurrentUser = login();
         switch(CurrentUser.getRole()){
             case ADMIN -> {
@@ -69,7 +74,7 @@ public class School {
         }
     }
 
-    private void teacherMenu(User currentUser) throws InterruptedException {
+    private void teacherMenu(User currentUser) {
         boolean isRunning = true;
         String TeacherMenu = """
 
@@ -98,7 +103,7 @@ public class School {
         }
     }
 
-    private void studentMenu(User currentUser) throws InterruptedException {
+    private void studentMenu(User currentUser) {
         boolean isRunning = true;
         String studentMenu = """
 
@@ -126,7 +131,7 @@ public class School {
             }
         }
     }
-    private void adminMenu() throws InterruptedException {
+    private void adminMenu() {
         boolean isRunning = true;
         String adminMenu = """
 
@@ -243,7 +248,7 @@ public class School {
         System.out.println("========================================");
     }
 
-    private void acceptApplicant() throws InterruptedException {
+    private void acceptApplicant() {
         System.out.println("========================================");
         System.out.println("         ACCEPTING APPLICANT");
         System.out.println("========================================");
@@ -267,7 +272,12 @@ public class School {
         for(Applicant applicant:applicants){
             if (applicant.getFirstName().equalsIgnoreCase(firstName) && applicant.getLastName().equalsIgnoreCase(lastName)){
                 System.out.println("\rSearching for applicant");
-                Thread.sleep(1000);
+                try{
+                    Thread.sleep(1000);
+                }
+                catch(InterruptedException e){
+                    Thread.currentThread().interrupt();
+                }
                 System.out.println("\rApplicant found");
                 found = applicant;
                 break;
@@ -335,6 +345,12 @@ public class School {
         for(Applicant applicant:applicants){
             if (applicant.getFirstName().equalsIgnoreCase(firstName) && applicant.getLastName().equalsIgnoreCase(lastName)){
                 System.out.println("\rSearching for applicant");
+                try{
+                    Thread.sleep(1500);
+                }
+                catch(InterruptedException e){
+                    Thread.currentThread().interrupt();
+                }
                 System.out.println("\rApplicant found");
                 found = applicant;
                 break;
