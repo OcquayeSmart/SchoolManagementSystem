@@ -557,20 +557,36 @@ public class School {
 
     private void viewMyClass(User user){
         Student student = (Student) user.getProfile();
-        findCurrentClass(student);
-
+        Classes currentClass = findCurrentClass(student);
+        System.out.println("Class level: " + currentClass.getClassLevel() + " Class ID: " + currentClass.getClassID() + " Class courses: " + currentClass.getCourses());
     }
     //TEACHER
     private void viewTeacherDetails(User user){
-
+        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
+        System.out.println("Name: " + teachingStaff.getFirstName() + " " + teachingStaff.getLastName());
+        System.out.println("Staff ID: " + teachingStaff.getStaffId());
+        System.out.println("Department: " + teachingStaff.getDepartment());
+        System.out.println("Salary: " + teachingStaff.getDepartment());
     }
 
     private void viewMyCourses(User user){
-
+        int myNumber = 1;
+        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
+        for(Course course: teachingStaff.getListOfCourses()){
+            System.out.println(myNumber + ". " + course);
+            myNumber++;
+        }
     }
 
     private void viewStudentsInMyCourse(User user){
-
+        int myNumber = 1;
+        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
+        for(Course course: teachingStaff.getListOfCourses()){
+            for(Student student: course.getEnrolledStudents()){
+                System.out.println(myNumber + ". " + student);
+                myNumber++;
+            }
+        }
     }
     //========================================================================
     public void createUserAccount(Person person, Role role){
