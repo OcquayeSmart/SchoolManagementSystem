@@ -5,7 +5,7 @@ import java.util.UUID;
 public class Student extends Person{
     private final UUID studentID;
     private final List<Course> enrolledCourses;
-    private ClassLevel classLevel;
+    private final ClassLevel classLevel;
     private boolean hasGraduated = false;
 
     public Student(int id, String firstName, String lastName, String dateOfBirth, ClassLevel classlevel) {
@@ -14,10 +14,7 @@ public class Student extends Person{
         this.enrolledCourses = new ArrayList<>();
         this.classLevel = classlevel;
     }
-//    public boolean hasGraduated(){
-//        //check this code again
-//        return hasGraduated;
-//    }
+
     public void enrollInCourse(Course course){
         if(!enrolledCourses.contains(course)){
             enrolledCourses.add(course);
@@ -42,9 +39,6 @@ public class Student extends Person{
 
     public ClassLevel getClasslevel() {
         return classLevel;
-    }
-    public void setClassLevel(ClassLevel classlevel) {
-        this.classLevel = classlevel;
     }
 
     public List<Course> getEnrolledCourses() {

@@ -81,7 +81,7 @@ public class School {
                 Thread.currentThread().interrupt();
             }
             for(User user: users){
-                if(user.getPassword().equals(password) && user.getUsername().equals(username)){
+                if(user.password().equals(password) && user.username().equals(username)){
                     System.out.print("\rStatus: Access Granted!");
                     return user;
                 }
@@ -91,17 +91,17 @@ public class School {
     }
     public void run(){
         User CurrentUser = login();
-        switch(CurrentUser.getRole()){
+        switch(CurrentUser.role()){
             case ADMIN -> {
-                System.out.println("\nWelcome " + CurrentUser.getUsername());
+                System.out.println("\nWelcome " + CurrentUser.username());
                 adminMenu();
             }
             case STUDENT -> {
-                System.out.println("\nWelcome " + CurrentUser.getUsername());
+                System.out.println("\nWelcome " + CurrentUser.username());
                 studentMenu(CurrentUser);
             }
             case TEACHER -> {
-                System.out.println("\nWelcome " + CurrentUser.getUsername());
+                System.out.println("\nWelcome " + CurrentUser.username());
                 teacherMenu(CurrentUser);
             }
         }
@@ -510,7 +510,7 @@ public class School {
 
     private void viewAllStaff() {
         int myNumber = 1;
-        System.out.println("             Staff list                 ");
+        System.out.println("             Staff list");
         System.out.println();
 
         if (listOfStaff.isEmpty()) {
@@ -599,7 +599,7 @@ public class School {
 
     //STUDENT
     private void viewMyDetails(User user){
-        Student student = (Student) user.getProfile();
+        Student student = (Student) user.profile();
         System.out.println("Name: " + student.getFirstName() + " " + student.getLastName());
         System.out.println("Student ID: " + student.getStudentID());
         System.out.println("Date Of Birth: " + student.getDateOfBirth());
@@ -609,7 +609,7 @@ public class School {
 
     private void viewMyEnrolledCourses(User user){
         int myNumber = 1;
-        Student student = (Student) user.getProfile();
+        Student student = (Student) user.profile();
         for(Course course: student.getEnrolledCourses()){
             System.out.println(myNumber + ". " + course.getCode() + " - " + course.getTitle() + " (" + course.getCreditUnits() + " credits)");
             myNumber++;
@@ -618,7 +618,7 @@ public class School {
 
     private void viewMyClass(User user){
         int myNumber = 1;
-        Student student = (Student) user.getProfile();
+        Student student = (Student) user.profile();
         Classes currentClass = findCurrentClass(student);
 
         if(currentClass == null){
@@ -641,7 +641,7 @@ public class School {
     }
     //TEACHER
     private void viewTeacherDetails(User user){
-        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
+        TeachingStaff teachingStaff = (TeachingStaff) user.profile();
         System.out.println("Name: " + teachingStaff.getFirstName() + " " + teachingStaff.getLastName());
         System.out.println("Staff ID: " + teachingStaff.getStaffId());
         System.out.println("Department: " + teachingStaff.getDepartment());
@@ -650,7 +650,7 @@ public class School {
 
     private void viewMyCourses(User user){
         int myNumber = 1;
-        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
+        TeachingStaff teachingStaff = (TeachingStaff) user.profile();
         for(Course course: teachingStaff.getListOfCourses()){
             System.out.println(myNumber + ". " + course.getCode() + " - " + course.getTitle() + " (" + course.getCreditUnits() + " credits)");
             myNumber++;
@@ -659,7 +659,7 @@ public class School {
 
     private void viewStudentsInMyCourse(User user){
         int myNumber = 1;
-        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
+        TeachingStaff teachingStaff = (TeachingStaff) user.profile();
         for(Course course: teachingStaff.getListOfCourses()){
             for(Student student: course.getEnrolledStudents()){
                 System.out.println(myNumber + ". Full name: " + student.getFirstName() + " " + student.getLastName() + " ,ID: " + student.getId() + " ,Class level: "+ student.getClasslevel());

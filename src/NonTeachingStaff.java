@@ -4,7 +4,4 @@ public class NonTeachingStaff extends Staff{
         super(id, firstName, lastName, dateOfBirth, staffId, salary, role);
         this.jobTitle = jobTitle;
     }
-    public String getJobTitle() {
-        return jobTitle;
-    }
 }
