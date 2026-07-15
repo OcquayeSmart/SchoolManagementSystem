@@ -217,7 +217,7 @@ public class School {
     //ADMIN
 
     private void registerApplicant(){
-        System.out.println("        REGISTER NEW APPLICANT          ");
+        System.out.println("        REGISTER NEW APPLICANT");
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
 
@@ -274,7 +274,7 @@ public class School {
 
     private void viewAllApplicants(){
         int myNumber = 1;
-        System.out.println("             Applicant list             ");
+        System.out.println("             Applicant list");
         System.out.println();
 
         if (applicants.isEmpty()){
@@ -361,7 +361,7 @@ public class School {
     }
 
     private void rejectApplicant(){
-        System.out.println("           REJECT APPLICATION           ");
+        System.out.println("           REJECT APPLICATION");
         System.out.println();
 
         if(applicants.isEmpty()){
@@ -421,7 +421,7 @@ public class School {
 
     private void viewAllStudents(){
         int myNumber = 1;
-        System.out.println("             Student list               ");
+        System.out.println("             Student list");
         System.out.println();
 
         if(listOfStudents.isEmpty()){
@@ -436,7 +436,7 @@ public class School {
     }
 
     private void addTeachingStaff(){
-        System.out.println("          REGISTER NEW TEACHER          ");
+        System.out.println("          REGISTER NEW TEACHER");
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
 
@@ -470,11 +470,11 @@ public class School {
         listOfTeachingStaff.add(teachingStaff);
         createUserAccount(teachingStaff, Role.TEACHER);
 
-        System.out.println("     Teacher registered successfully    ");
+        System.out.println("     Teacher registered successfully");
     }
 
     private void addaNonTeachingStaff() {
-        System.out.println("     REGISTER NEW NON TEACHING STAFF    ");
+        System.out.println("     REGISTER NEW NON TEACHING STAFF");
 
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
@@ -504,7 +504,7 @@ public class School {
 
         addStaff(nonteachingStaff);
 
-        System.out.println("    Non teaching staff registered successfully   ");
+        System.out.println("    Non teaching staff registered successfully");
     }
 
     private void viewAllStaff() {
@@ -545,7 +545,7 @@ public class School {
 
     private void viewAllCourses(){
         int myNumber = 1;
-        System.out.println("            List of courses             ");
+        System.out.println("            List of courses");
         System.out.println();
 
         if(listOfCourses.isEmpty()){
@@ -581,7 +581,7 @@ public class School {
 
     private void viewAllClasses(){
         int myNumber = 1;
-        System.out.println("            List of Classes             ");
+        System.out.println("            List of Classes");
         System.out.println();
 
         if(listOfClasses.isEmpty()){
