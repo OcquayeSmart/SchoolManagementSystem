@@ -1,8 +1,5 @@
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class School {
     private final Scanner scanner = new Scanner(System.in);
@@ -12,12 +9,14 @@ public class School {
     private final List<Student> listOfStudents;
     private final List<Classes> listOfClasses;
     private final List<TeachingStaff> listOfTeachingStaff;
+    private final List<NonTeachingStaff> listOfNonTeachingStaff;
     private final List<Course> listOfCourses;
     private final List<Staff> listOfStaff;
     private final List<Applicant> applicants;
     private final List<Applicant> rejectedApplicants;
 
     public School(String name, String address) {
+        this.listOfNonTeachingStaff = new ArrayList<>();
         this.rejectedApplicants = new ArrayList<>();
         this.applicants = new ArrayList<>();
         this.users = new ArrayList<>();
@@ -31,18 +30,40 @@ public class School {
         this.listOfCourses = new ArrayList<>();
     }
 
+    //Using a helper method for checking edge cases
+    private int checkInt(){
+        while(true){
+            try{
+                return Integer.parseInt(scanner.nextLine().trim());
+            }
+            catch(NumberFormatException e){
+                System.out.print("Invalid Input, please try again: ");
+            }
+        }
+    }
+    private int checkRange(int min, int max){
+        while(true){
+            int value = checkInt();
+            if(value >= min && value <= max){
+                return value;
+            }
+            else{
+                System.out.print("Invalid input, please try again: ");
+            }
+        }
+    }
+
+
     private User login() {
         while(true){
             System.out.println("Welcome back! Please enter your credentials.");
-            System.out.println("-----------------------------");
             System.out.print("Username: ");
             String username = scanner.nextLine();
             System.out.print("Password: ");
             String password = scanner.nextLine();
-            System.out.println("-----------------------------");
             System.out.print("\n\rStatus: Verifying Credentials...");
             try{
-                Thread.sleep(1600);
+                Thread.sleep(1300);
             }
             catch(InterruptedException e){
                 Thread.currentThread().interrupt();
@@ -78,14 +99,14 @@ public class School {
         boolean isRunning = true;
         String TeacherMenu = """
 
-================================
+
     KNUST TEACHING STAFF PORTAL
-================================
+
 1. View My Details
 2. View My Courses
 3. View Students In My Course
 0. Logout
-================================
+
                 """;
         while(isRunning){
             System.out.println(TeacherMenu);
@@ -107,14 +128,14 @@ public class School {
         boolean isRunning = true;
         String studentMenu = """
 
-================================
+
     KNUST STUDENT PORTAL
-================================
+
 1. View My Details
 2. View Enrolled Courses
 3. View Class Information
 0. Logout
-================================
+
                 """;
         while(isRunning){
             System.out.println(studentMenu);
@@ -135,9 +156,9 @@ public class School {
         boolean isRunning = true;
         String adminMenu = """
 
-=============================
-   KNUST - ADMIN CENTER
-=============================
+
+   KNUST ADMIN CENTER
+
 1.  Register Applicant
 2.  View All Applicants
 3.  Accept Applicant
@@ -152,7 +173,7 @@ public class School {
 12. Add Class
 13. View All Classes
 0.  Logout
-=============================
+
                         """;
         while(isRunning){
             System.out.println(adminMenu);
@@ -185,10 +206,7 @@ public class School {
     //ADMIN
 
     private void registerApplicant(){
-        System.out.println("========================================");
         System.out.println("        REGISTER NEW APPLICANT          ");
-        System.out.println("========================================");
-
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
 
@@ -225,14 +243,11 @@ public class School {
         receiveApplication(applicant);
 
         System.out.println("    Applicant registered successfully   ");
-        System.out.println("========================================");
     }
 
     private void viewAllApplicants(){
         int myNumber = 1;
-        System.out.println("========================================");
         System.out.println("             Applicant list             ");
-        System.out.println("========================================");
         System.out.println();
 
         if (applicants.isEmpty()){
@@ -245,13 +260,10 @@ public class School {
             System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t" + applicant.getPreviousSchool() + " \t" + applicant.getPreviousGPA() + " \t" + applicant.getApplicantStatus());
             myNumber++;
         }
-        System.out.println("========================================");
     }
 
     private void acceptApplicant() {
-        System.out.println("========================================");
         System.out.println("         ACCEPTING APPLICANT");
-        System.out.println("========================================");
         System.out.println();
 
         if(applicants.isEmpty()){
@@ -319,13 +331,10 @@ public class School {
         applicants.remove(found);
 
         System.out.println("Student accepted and enrolled successfully");
-        System.out.println("==========================================");
     }
 
     private void rejectApplicant(){
-        System.out.println("========================================");
         System.out.println("           REJECT APPLICATION           ");
-        System.out.println("========================================");
         System.out.println();
 
         if(applicants.isEmpty()){
@@ -365,14 +374,11 @@ public class School {
         applicants.remove(found);
 
         System.out.println("     Student rejected successfully");
-        System.out.println("==========================================");
     }
 
     private void viewRejectedApplications(){
         int myNumber = 1;
-        System.out.println("========================================");
         System.out.println("         Rejected Applicant list        ");
-        System.out.println("========================================");
         System.out.println();
 
         if(rejectedApplicants.isEmpty()){
@@ -384,32 +390,26 @@ public class School {
             System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t" + applicant.getPreviousSchool() + " \t" + applicant.getPreviousGPA() + " \t" + applicant.getApplicantStatus());
             myNumber++;
         }
-        System.out.println("========================================");
     }
 
     private void viewAllStudents(){
         int myNumber = 1;
-        System.out.println("========================================");
         System.out.println("             Student list               ");
-        System.out.println("========================================");
         System.out.println();
-        System.out.println("\tFirst name \tLast name \tDate of birth");
 
         if(listOfStudents.isEmpty()){
             System.out.println("No student available");
         }
+
+        System.out.println("\tFirst name \tLast name \tDate of birth");
         for(Student student:listOfStudents){
             System.out.println(myNumber + ". \t" + student.getFirstName() + " \t" + student.getLastName() + " \t" + student.getDateOfBirth());
             myNumber++;
         }
-        System.out.println("========================================");
     }
 
     private void addTeachingStaff(){
-        System.out.println("========================================");
         System.out.println("          REGISTER NEW TEACHER          ");
-        System.out.println("========================================");
-
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
 
@@ -444,13 +444,10 @@ public class School {
         createUserAccount(teachingStaff, Role.TEACHER);
 
         System.out.println("     Teacher registered successfully    ");
-        System.out.println("========================================");
     }
 
     private void addaNonTeachingStaff() {
-        System.out.println("========================================");
         System.out.println("     REGISTER NEW NON TEACHING STAFF    ");
-        System.out.println("========================================");
 
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
@@ -471,7 +468,7 @@ public class School {
         System.out.print("Staff role: ");
         String role = scanner.nextLine();
 
-        int id = listOfTeachingStaff.size() + 1;
+        int id = listOfNonTeachingStaff.size() + 1;
 
         String staffID = firstName + id;
 
@@ -481,32 +478,26 @@ public class School {
         addStaff(nonteachingStaff);
 
         System.out.println("    Non teaching staff registered successfully   ");
-        System.out.println("=================================================");
     }
 
-    private void viewAllStaff(){
+    private void viewAllStaff() {
         int myNumber = 1;
-        System.out.println("========================================");
         System.out.println("             Staff list                 ");
-        System.out.println("========================================");
         System.out.println();
 
-        if(listOfStaff.isEmpty()){
+        if (listOfStaff.isEmpty()) {
             System.out.println("No staff members available");
             return;
         }
         System.out.println("\tFirst name \tLast name \tDate of birth");
-        for(Staff staff:listOfStaff){
+        for (Staff staff : listOfStaff) {
             System.out.println(myNumber + ". \t" + staff.getFirstName() + " \t" + staff.getLastName() + " \t" + staff.getDateOfBirth());
             myNumber++;
         }
-        System.out.println("========================================");
-        }
+    }
 
     private void addCourse(){
-        System.out.println("========================================");
         System.out.println("               Add courses             ");
-        System.out.println("========================================");
         System.out.println();
 
         System.out.println("Course code: ");
@@ -527,9 +518,7 @@ public class School {
 
     private void viewAllCourses(){
         int myNumber = 1;
-        System.out.println("========================================");
         System.out.println("            List of courses             ");
-        System.out.println("========================================");
         System.out.println();
 
         if(listOfCourses.isEmpty()){
@@ -541,7 +530,6 @@ public class School {
             System.out.println(myNumber + ". \t" + course.getCode() + " \t" + course.getTitle() + " \t" + course.getCreditUnits());
             myNumber++;
         }
-        System.out.println("========================================");
     }
 
     private void addClass(){
@@ -561,15 +549,12 @@ public class School {
 
         Classes classes = new Classes(classID, level, new ArrayList<>(), false, new ArrayList<>());
         addClass(classes);
-        System.out.println("========================");
         System.out.println("Class added successfully");
     }
 
     private void viewAllClasses(){
         int myNumber = 1;
-        System.out.println("========================================");
         System.out.println("            List of Classes             ");
-        System.out.println("========================================");
         System.out.println();
 
         if(listOfClasses.isEmpty()){
@@ -582,7 +567,6 @@ public class School {
             System.out.println(myNumber + ". \t" + classes.getClassID() + " \t" + classes.getClassLevel() + " \t" + classes.size());
             myNumber++;
         }
-        System.out.println("========================================");
     }
 
     //STUDENT
@@ -655,7 +639,6 @@ public class School {
             }
         }
     }
-    //========================================================================
     public void createUserAccount(Person person, Role role){
         Random random = new Random();
         int uniqueNumber = random.nextInt(10, 99);
@@ -731,10 +714,24 @@ public class School {
     public void assignTeacher(TeachingStaff teacher, Course course){
         course.setTeacher(teacher);
     }
+//    private int catchInt(){
+//        while(true){
+//            try{
+//                return scanner.nextInt();
+//            }
+//            catch(NumberFormatException e){
+//                System.out.println("Invalid expression, enter a valid number: ");
+//            }
+//        }
+//    }
     public void addClass(Classes classes){
         if(!listOfClasses.contains(classes)){
             listOfClasses.add(classes);
         }
+//        else{
+//            catchInt();
+//            System.out.println("Enter an integer: ");
+//        }
     }
     public void assignStudentToClass(Student student, Classes classes){
         classes.addStudent(student);
