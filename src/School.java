@@ -30,11 +30,22 @@ public class School {
         this.listOfCourses = new ArrayList<>();
     }
 
-    //Using a helper method for checking edge cases
+    //Using helper methods for checking edge cases
+    //saves so much time lol
     private int checkInt(){
         while(true){
             try{
                 return Integer.parseInt(scanner.nextLine().trim());
+            }
+            catch(NumberFormatException e){
+                System.out.print("Invalid Input, please try again: ");
+            }
+        }
+    }
+    private double checkDouble(){
+        while(true){
+            try{
+                return Double.parseDouble(scanner.nextLine().trim());
             }
             catch(NumberFormatException e){
                 System.out.print("Invalid Input, please try again: ");
@@ -48,7 +59,8 @@ public class School {
                 return value;
             }
             else{
-                System.out.print("Invalid input, please try again: ");
+                System.out.println("Invalid input");
+                System.out.print("Please enter a number between " + min + " and " + max + ": ");
             }
         }
     }
@@ -110,7 +122,7 @@ public class School {
                 """;
         while(isRunning){
             System.out.println(TeacherMenu);
-            int userInput = scanner.nextInt();
+            int userInput = checkInt();
             scanner.nextLine();
             switch(userInput){
                 case 1 -> viewTeacherDetails(currentUser);
@@ -139,7 +151,7 @@ public class School {
                 """;
         while(isRunning){
             System.out.println(studentMenu);
-            int userInput = scanner.nextInt();
+            int userInput = checkInt();
             scanner.nextLine();
             switch(userInput){
                 case 1 -> viewMyDetails(currentUser);
@@ -177,7 +189,7 @@ public class School {
                         """;
         while(isRunning){
             System.out.println(adminMenu);
-            int userChoice = scanner.nextInt();
+            int userChoice = checkInt();
             scanner.nextLine();
             switch(userChoice){
                 case 1 -> registerApplicant();
@@ -201,7 +213,6 @@ public class School {
             }
         }
     }
-    //========================================================================
     //CREATING STUBS HERE, they ask the user for input and calls existing methods for logic
     //ADMIN
 
@@ -219,9 +230,25 @@ public class School {
         System.out.print("Previous School: ");
         String previousSchool = scanner.nextLine();
 
+        Double previousGPA = null;
         System.out.print("Previous GPA: ");
-        String gpaInput = scanner.nextLine();
-        Double previousGPA = gpaInput.isEmpty() ? null : Double.parseDouble(gpaInput);
+        while(true){
+            try{
+                double value = Double.parseDouble(scanner.nextLine());
+                if(value >= 1.00 && value <= 5.00){
+                    previousGPA = value;
+                    break;
+                }
+                else{
+                    System.out.println("Invalid input, try again");
+                    System.out.println("Input must be between 1.00 and 5.00: ");
+                }
+            }
+            catch(NumberFormatException e){
+                System.out.println("Input is not a number, please enter a valid number");
+                System.out.print("Try again: ");
+            }
+        }
 
         System.out.println("Select desired Class Level");
         ClassLevel[] levels = ClassLevel.values();
@@ -229,7 +256,7 @@ public class School {
             System.out.println(i + 1 + ". " + levels[i]);
         }
         System.out.print("Enter number: ");
-        int levelChoice = Integer.parseInt(scanner.nextLine());
+        int levelChoice = checkRange(1, levels.length);
         ClassLevel desiredLevel = levels[levelChoice - 1];
 
         int id = applicants.size() + 1;
@@ -420,7 +447,7 @@ public class School {
         String dateOfBirth = scanner.nextLine();
 
         System.out.println("Teacher's Salary(GHS): ");
-        double salary = scanner.nextDouble();
+        double salary = checkDouble();
         scanner.nextLine();
 
         System.out.println("Select desired ");
@@ -429,7 +456,7 @@ public class School {
             System.out.println(i + 1 + ". " + departments[i]);
         }
         System.out.print("Enter number: ");
-        int departmentChoice = Integer.parseInt(scanner.nextLine());
+        int departmentChoice = checkRange(1, departments.length);
         Department department = departments[departmentChoice - 1];
 
         int id = listOfTeachingStaff.size() + 1;
@@ -459,7 +486,7 @@ public class School {
         String dateOfBirth = scanner.nextLine();
 
         System.out.print("Salary(GHS): ");
-        double salary = scanner.nextDouble();
+        double salary = checkDouble();
         scanner.nextLine();
 
         System.out.print("Job title: ");
@@ -507,7 +534,7 @@ public class School {
         String courseTitle = scanner.nextLine();
 
         System.out.println("Credit Units(hr): ");
-        int creditUnits = scanner.nextInt();
+        int creditUnits = checkInt();
         scanner.nextLine();
 
         Course course = new Course(creditUnits, null, courseTitle, courseCode);
@@ -541,7 +568,7 @@ public class School {
         }
 
         System.out.println("Select desired ");
-        int classLevelChoice = Integer.parseInt(scanner.nextLine());
+        int classLevelChoice = checkRange(1, classLevel.length);
         ClassLevel level = classLevel[classLevelChoice - 1];
 
         System.out.println("Class ID: ");
@@ -594,7 +621,7 @@ public class School {
         Classes currentClass = findCurrentClass(student);
 
         if(currentClass == null){
-            System.out.println("You are not assigned to any class yet.");
+            System.out.println("Please, you are not assigned to any class yet.");
             return;
         }
 
@@ -655,7 +682,7 @@ public class School {
     }
 
     public void receiveApplication(Applicant applicant) {
-        System.out.println(applicant.getFirstName()+" "+applicant.getLastName() + "'s application has been received" );
+        System.out.println(applicant.getFirstName() + " " + applicant.getLastName() + "'s application has been received" );
     }
 
     public void reviewApplication(Applicant applicant) {
@@ -698,47 +725,41 @@ public class School {
         return newStudent;
 
     }
+
     public Student admitEnrollAndPlaceInClass(Applicant applicant, Classes startingClass){
         Student newStudent = admitAndEnroll(applicant);
         assignStudentToClass(newStudent, startingClass);
         return newStudent;
     }
+
     public void addStaff(Staff staff){
         if(!listOfStaff.contains(staff)){
             listOfStaff.add(staff);
         }
     }
+
     public void removeStaff(Staff staff){
         listOfStaff.remove(staff);
     }
+
     public void assignTeacher(TeachingStaff teacher, Course course){
         course.setTeacher(teacher);
     }
-//    private int catchInt(){
-//        while(true){
-//            try{
-//                return scanner.nextInt();
-//            }
-//            catch(NumberFormatException e){
-//                System.out.println("Invalid expression, enter a valid number: ");
-//            }
-//        }
-//    }
+
     public void addClass(Classes classes){
         if(!listOfClasses.contains(classes)){
             listOfClasses.add(classes);
         }
-//        else{
-//            catchInt();
-//            System.out.println("Enter an integer: ");
-//        }
     }
+
     public void assignStudentToClass(Student student, Classes classes){
         classes.addStudent(student);
     }
+
     public Classes findCurrentClass(Student student){
         return findClassByLevel(student.getClasslevel());
     }
+
     public void promoteStudent(Student student){
         Classes currentClass = findCurrentClass(student);
         int nextClassOrdinal = currentClass.getClassLevel().ordinal() + 1;
@@ -753,6 +774,7 @@ public class School {
             currentClass.removeStudent(student);
         }
     }
+
     public void demoteStudent(Student student){
         Classes currentClass = findCurrentClass(student);
         int previousClassOrdinal = currentClass.getClassLevel().ordinal() - 1;
@@ -764,12 +786,14 @@ public class School {
             currentClass.removeStudent(student);
         }
     }
+
     public void assignCoursesForClass(TeachingStaff teacher, Classes classes, List<Course> coursesForClass){
         for(Course course:coursesForClass){
             classes.addCourse(course);
             assignTeacher(teacher, course);
         }
     }
+
     public String getName() {
         return name;
     }
