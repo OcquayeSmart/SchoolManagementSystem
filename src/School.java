@@ -123,7 +123,6 @@ public class School {
         while(isRunning){
             System.out.println(TeacherMenu);
             int userInput = checkInt();
-            scanner.nextLine();
             switch(userInput){
                 case 1 -> viewTeacherDetails(currentUser);
                 case 2 -> viewMyCourses(currentUser);
@@ -230,7 +229,7 @@ public class School {
         System.out.print("Previous School: ");
         String previousSchool = scanner.nextLine();
 
-        double previousGPA;
+        Double previousGPA;
         System.out.print("Previous GPA: ");
         while(true){
             try{
@@ -269,7 +268,7 @@ public class School {
         applicants.add(applicant);
         receiveApplication(applicant);
 
-        System.out.println("    Applicant registered successfully   ");
+        System.out.println("    Applicant registered successfully");
     }
 
     private void viewAllApplicants(){
@@ -426,6 +425,7 @@ public class School {
 
         if(listOfStudents.isEmpty()){
             System.out.println("No student available");
+            return;
         }
 
         System.out.println("\tFirst name \tLast name \tDate of birth");
@@ -448,7 +448,6 @@ public class School {
 
         System.out.println("Teacher's Salary(GHS): ");
         double salary = checkDouble();
-        scanner.nextLine();
 
         System.out.println("Select desired ");
         Department[] departments = Department.values();
@@ -525,7 +524,7 @@ public class School {
     }
 
     private void addCourse(){
-        System.out.println("               Add courses             ");
+        System.out.println("               Add courses");
         System.out.println();
 
         System.out.println("Course code: ");
@@ -536,7 +535,6 @@ public class School {
 
         System.out.println("Credit Units(hr): ");
         int creditUnits = checkInt();
-        scanner.nextLine();
 
         Course course = new Course(creditUnits, null, courseTitle, courseCode);
         listOfCourses.add(course);
