@@ -2,10 +2,10 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 public class Applicant extends Person{
-    private ClassLevel desiredClassLevel;
-    private String previousSchool;
-    private Double previousGPA;
-    private LocalDate applicationDate;
+    private final ClassLevel desiredClassLevel;
+    private final String previousSchool;
+    private final Double previousGPA;
+    private final LocalDate applicationDate;
     boolean submitApplication;
     private ApplicationStatus applicantStatus;
 
@@ -19,17 +19,9 @@ public class Applicant extends Person{
         this.submitApplication = false;
         this.applicantStatus = applicantStatus;
     }
-    public void submitApplication(Applicant applicant){
-        System.out.println();
-        submitApplication = true;
-        System.out.println("Application submitted for " + getFirstName() + " " + getLastName());
-    }
+
     public Student enroll(){
         return new Student(this.getId(), this.getFirstName(), this.getLastName(), this.getDateOfBirth(),this.desiredClassLevel);
-    }
-
-    public ClassLevel getDesiredClassLevel() {
-        return desiredClassLevel;
     }
 
     public String getPreviousSchool() {
@@ -40,36 +32,8 @@ public class Applicant extends Person{
         return previousGPA;
     }
 
-    public LocalDate getApplicationDate() {
-        return applicationDate;
-    }
-
-    public boolean isSubmitApplication() {
-        return submitApplication;
-    }
-
     public ApplicationStatus getApplicantStatus() {
         return applicantStatus;
-    }
-
-    public void setDesiredClassLevel(ClassLevel desiredClassLevel) {
-        this.desiredClassLevel = desiredClassLevel;
-    }
-
-    public void setPreviousSchool(String previousSchool) {
-        this.previousSchool = previousSchool;
-    }
-
-    public void setPreviousGPA(Double previousGPA) {
-        this.previousGPA = previousGPA;
-    }
-
-    public void setApplicationDate(LocalDate applicationDate) {
-        this.applicationDate = applicationDate;
-    }
-
-    public void setSubmitApplication(boolean submitApplication) {
-        this.submitApplication = submitApplication;
     }
 
     public void setApplicantStatus(ApplicationStatus applicantStatus) {

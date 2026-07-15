@@ -6,8 +6,8 @@ public class Classes{
     private final ClassLevel classLevel;
     private final List<Student> listOfStudents;
     private final boolean hasStudent;
-    private List<TeachingStaff> teachingStaffs;
-    private List<Course> courses = new ArrayList<>();
+    private final List<TeachingStaff> teachingStaffs;
+    private final List<Course> courses = new ArrayList<>();
 
     public Classes(String classID, ClassLevel classLevel, List<Student> listOfStudents, boolean hasStudent, List<TeachingStaff> teachingStaffs) {
         this.classID = classID;
@@ -26,9 +26,6 @@ public class Classes{
     public void removeStudent(Student student){
         listOfStudents.remove(student);
     }
-    public boolean hasStudent(Student student){
-        return listOfStudents.contains(student);
-    }
     public void addCourse(Course course){
         if(!courses.contains(course)){
             courses.add(course);
@@ -44,22 +41,8 @@ public class Classes{
     public ClassLevel getClassLevel() {
         return classLevel;
     }
-    public List<Student> getListOfStudents() {
-        return listOfStudents;
-    }
-    public void setTeachingStaffs(List<TeachingStaff> teachingStaffs) {
-        this.teachingStaffs = teachingStaffs;
-    }
-
-    public List<TeachingStaff> getTeachingStaffs() {
-        return teachingStaffs;
-    }
 
     public List<Course> getCourses() {
         return courses;
-    }
-
-    public void setCourses(List<Course> courses) {
-        this.courses = courses;
     }
 }
