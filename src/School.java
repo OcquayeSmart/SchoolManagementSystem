@@ -230,7 +230,7 @@ public class School {
         System.out.print("Previous School: ");
         String previousSchool = scanner.nextLine();
 
-        Double previousGPA = null;
+        double previousGPA;
         System.out.print("Previous GPA: ");
         while(true){
             try{
@@ -503,6 +503,7 @@ public class School {
         System.out.println();
 
         addStaff(nonteachingStaff);
+        listOfNonTeachingStaff.add(nonteachingStaff);
 
         System.out.println("    Non teaching staff registered successfully");
     }
@@ -669,11 +670,6 @@ public class School {
     public void createUserAccount(Person person, Role role){
         Random random = new Random();
         int uniqueNumber = random.nextInt(10, 99);
-    //        String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    //        String randomString = new java.util.Random().ints(10, 0, ALPHABET.length())
-    //                .mapToObj(ALPHABET::charAt)
-    //                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-    //                .toString() + uniqueNumber;
         String randomString = person.getFirstName().toLowerCase() + uniqueNumber;
         String defaultPassword = "pass123";
         User newUser = new User(randomString, defaultPassword, role, person);
@@ -710,15 +706,6 @@ public class School {
         return null;
     }
 
-    public void removeStudent(Student student){
-        listOfStudents.remove(student);
-    }
-    public void addStudent(Student student){
-        if(!listOfStudents.contains(student)) {
-            listOfStudents.add(student);
-        }
-    }
-
     public Student admitAndEnroll(Applicant applicant){
         Student newStudent = applicant.enroll();
         listOfStudents.add(newStudent);
@@ -736,10 +723,6 @@ public class School {
         if(!listOfStaff.contains(staff)){
             listOfStaff.add(staff);
         }
-    }
-
-    public void removeStaff(Staff staff){
-        listOfStaff.remove(staff);
     }
 
     public void assignTeacher(TeachingStaff teacher, Course course){
@@ -792,33 +775,5 @@ public class School {
             classes.addCourse(course);
             assignTeacher(teacher, course);
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public List<Student> getListOfStudents() {
-        return listOfStudents;
-    }
-
-    public List<Classes> getListOfClasses() {
-        return listOfClasses;
-    }
-
-    public List<TeachingStaff> getListOfTeachingStaff() {
-        return listOfTeachingStaff;
-    }
-
-    public List<Staff> getListOfStaff() {
-        return listOfStaff;
-    }
-
-    public List<Course> getListOfCourses() {
-        return listOfCourses;
     }
 }
