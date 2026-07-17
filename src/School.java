@@ -75,7 +75,7 @@ public class School {
             String password = scanner.nextLine();
             System.out.print("\n\rStatus: Verifying Credentials...");
             try{
-                Thread.sleep(1300);
+                Thread.sleep(900);
             }
             catch(InterruptedException e){
                 Thread.currentThread().interrupt();
@@ -112,7 +112,7 @@ public class School {
         String TeacherMenu = """
 
 
-    KNUST TEACHING STAFF PORTAL
+KNUST TEACHING STAFF PORTAL
 
 1. View My Details
 2. View My Courses
@@ -139,8 +139,7 @@ public class School {
         boolean isRunning = true;
         String studentMenu = """
 
-
-    KNUST STUDENT PORTAL
+KNUST STUDENT PORTAL
 
 1. View My Details
 2. View Enrolled Courses
@@ -151,7 +150,6 @@ public class School {
         while(isRunning){
             System.out.println(studentMenu);
             int userInput = checkInt();
-            scanner.nextLine();
             switch(userInput){
                 case 1 -> viewMyDetails(currentUser);
                 case 2 -> viewMyEnrolledCourses(currentUser);
@@ -167,9 +165,7 @@ public class School {
         boolean isRunning = true;
         String adminMenu = """
 
-
-   KNUST ADMIN CENTER
-
+KNUST ADMIN CENTER
 1.  Register Applicant
 2.  View All Applicants
 3.  Accept Applicant
@@ -184,12 +180,10 @@ public class School {
 12. Add Class
 13. View All Classes
 0.  Logout
-
-                        """;
+""";
         while(isRunning){
             System.out.println(adminMenu);
             int userChoice = checkInt();
-            scanner.nextLine();
             switch(userChoice){
                 case 1 -> registerApplicant();
                 case 2 -> viewAllApplicants();
@@ -214,9 +208,8 @@ public class School {
     }
     //CREATING STUBS HERE, they ask the user for input and calls existing methods for logic
     //ADMIN
-
     private void registerApplicant(){
-        System.out.println("        REGISTER NEW APPLICANT");
+        System.out.println("REGISTER NEW APPLICANT");
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
 
@@ -240,7 +233,7 @@ public class School {
                 }
                 else{
                     System.out.println("Invalid input, try again");
-                    System.out.println("Input must be between 1.00 and 5.00: ");
+                    System.out.print("Input must be between 1.00 and 5.00: ");
                 }
             }
             catch(NumberFormatException e){
@@ -268,12 +261,12 @@ public class School {
         applicants.add(applicant);
         receiveApplication(applicant);
 
-        System.out.println("    Applicant registered successfully");
+        System.out.println("Applicant registered successfully");
     }
 
     private void viewAllApplicants(){
         int myNumber = 1;
-        System.out.println("             Applicant list");
+        System.out.println("Applicant list");
         System.out.println();
 
         if (applicants.isEmpty()){
@@ -289,8 +282,7 @@ public class School {
     }
 
     private void acceptApplicant() {
-        System.out.println("         ACCEPTING APPLICANT");
-        System.out.println();
+        System.out.println("ACCEPTING APPLICANT");
 
         if(applicants.isEmpty()){
             System.out.println("No applicants in the system");
@@ -311,7 +303,7 @@ public class School {
             if (applicant.getFirstName().equalsIgnoreCase(firstName) && applicant.getLastName().equalsIgnoreCase(lastName)){
                 System.out.println("\rSearching for applicant");
                 try{
-                    Thread.sleep(1000);
+                    Thread.sleep(900);
                 }
                 catch(InterruptedException e){
                     Thread.currentThread().interrupt();
@@ -360,7 +352,7 @@ public class School {
     }
 
     private void rejectApplicant(){
-        System.out.println("           REJECT APPLICATION");
+        System.out.println("REJECT APPLICATION");
         System.out.println();
 
         if(applicants.isEmpty()){
@@ -380,12 +372,15 @@ public class School {
         for(Applicant applicant:applicants){
             if (applicant.getFirstName().equalsIgnoreCase(firstName) && applicant.getLastName().equalsIgnoreCase(lastName)){
                 System.out.println("\rSearching for applicant");
+
                 try{
                     Thread.sleep(1500);
                 }
+
                 catch(InterruptedException e){
                     Thread.currentThread().interrupt();
                 }
+
                 System.out.println("\rApplicant found");
                 found = applicant;
                 break;
@@ -399,12 +394,12 @@ public class School {
         rejectedApplicants.add(found);
         applicants.remove(found);
 
-        System.out.println("     Student rejected successfully");
+        System.out.println("Student rejected successfully");
     }
 
     private void viewRejectedApplications(){
         int myNumber = 1;
-        System.out.println("         Rejected Applicant list        ");
+        System.out.println("Rejected Applicant list");
         System.out.println();
 
         if(rejectedApplicants.isEmpty()){
@@ -420,7 +415,7 @@ public class School {
 
     private void viewAllStudents(){
         int myNumber = 1;
-        System.out.println("             Student list");
+        System.out.println("Student list");
         System.out.println();
 
         if(listOfStudents.isEmpty()){
@@ -436,7 +431,7 @@ public class School {
     }
 
     private void addTeachingStaff(){
-        System.out.println("          REGISTER NEW TEACHER");
+        System.out.println("REGISTER NEW TEACHER");
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
 
@@ -446,15 +441,15 @@ public class School {
         System.out.print("Date of Birth (YYYY-MM-DD): ");
         String dateOfBirth = scanner.nextLine();
 
-        System.out.println("Teacher's Salary(GHS): ");
+        System.out.print("Teacher's Salary(GHS): ");
         double salary = checkDouble();
 
-        System.out.println("Select desired ");
+        System.out.println("Select desired department");
         Department[] departments = Department.values();
         for(int i = 0; i < departments.length; i++){
             System.out.println(i + 1 + ". " + departments[i]);
         }
-        System.out.print("Enter number: ");
+        System.out.print("Enter preferred number: ");
         int departmentChoice = checkRange(1, departments.length);
         Department department = departments[departmentChoice - 1];
 
@@ -469,11 +464,11 @@ public class School {
         listOfTeachingStaff.add(teachingStaff);
         createUserAccount(teachingStaff, Role.TEACHER);
 
-        System.out.println("     Teacher registered successfully");
+        System.out.println("Teacher registered successfully");
     }
 
     private void addaNonTeachingStaff() {
-        System.out.println("     REGISTER NEW NON TEACHING STAFF");
+        System.out.println("REGISTER NEW NON TEACHING STAFF");
 
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
@@ -486,7 +481,6 @@ public class School {
 
         System.out.print("Salary(GHS): ");
         double salary = checkDouble();
-        scanner.nextLine();
 
         System.out.print("Job title: ");
         String jobTitle = scanner.nextLine();
@@ -504,12 +498,12 @@ public class School {
         addStaff(nonteachingStaff);
         listOfNonTeachingStaff.add(nonteachingStaff);
 
-        System.out.println("    Non teaching staff registered successfully");
+        System.out.println("Non teaching staff registered successfully");
     }
 
     private void viewAllStaff() {
         int myNumber = 1;
-        System.out.println("             Staff list");
+        System.out.println("Staff list");
         System.out.println();
 
         if (listOfStaff.isEmpty()) {
@@ -524,16 +518,15 @@ public class School {
     }
 
     private void addCourse(){
-        System.out.println("               Add courses");
-        System.out.println();
+        System.out.println("Add courses");
 
-        System.out.println("Course code: ");
+        System.out.print("Course code: ");
         String courseCode = scanner.nextLine();
 
-        System.out.println("Course title: ");
+        System.out.print("Course title: ");
         String courseTitle = scanner.nextLine();
 
-        System.out.println("Credit Units(hr): ");
+        System.out.print("Credit Units(hr): ");
         int creditUnits = checkInt();
 
         Course course = new Course(creditUnits, null, courseTitle, courseCode);
@@ -544,9 +537,7 @@ public class School {
 
     private void viewAllCourses(){
         int myNumber = 1;
-        System.out.println("            List of courses");
-        System.out.println();
-
+        System.out.println("List of courses");
         if(listOfCourses.isEmpty()){
             System.out.println("No courses available");
             return;
@@ -566,11 +557,11 @@ public class School {
             System.out.println(i + 1 + ". " + classLevel[i]);
         }
 
-        System.out.println("Select desired ");
+        System.out.println("Select desired class(1-" + classLevel.length + ")");
         int classLevelChoice = checkRange(1, classLevel.length);
         ClassLevel level = classLevel[classLevelChoice - 1];
 
-        System.out.println("Class ID: ");
+        System.out.print("Class ID: ");
         String classID = scanner.nextLine();
 
         Classes classes = new Classes(classID, level, new ArrayList<>(), false, new ArrayList<>());
@@ -580,7 +571,7 @@ public class School {
 
     private void viewAllClasses(){
         int myNumber = 1;
-        System.out.println("            List of Classes");
+        System.out.println("List of Classes");
         System.out.println();
 
         if(listOfClasses.isEmpty()){
