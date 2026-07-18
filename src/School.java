@@ -611,7 +611,8 @@ KNUST ADMIN CENTER
         Classes currentClass = findCurrentClass(student);
 
         if(currentClass == null){
-            System.out.println("Please, you are not assigned to any class yet.");
+            System.out.println("Dear Student");
+            System.out.println("You have not been assigned to a class at this time.");
             return;
         }
 
@@ -620,7 +621,7 @@ KNUST ADMIN CENTER
         System.out.println("Number of students: " + currentClass.size());
         System.out.println("\nCourses in this class:");
         if(currentClass.getCourses().isEmpty()){
-            System.out.println("No courses assigned yet.");
+            System.out.println("You have not been assigned courses at this time.");
         } else {
             for(Course course : currentClass.getCourses()){
                 System.out.println(myNumber + ". " +course.getCode() + " " + course.getTitle());
