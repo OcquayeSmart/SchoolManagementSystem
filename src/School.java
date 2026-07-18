@@ -28,8 +28,8 @@ public class School {
         this.listOfClasses = new ArrayList<>();
         this.listOfTeachingStaff = new ArrayList<>();
         this.listOfCourses = new ArrayList<>();
+        testData();
     }
-
     //Using helper methods for checking edge cases
     //saves so much time lol
     private int checkInt(){
@@ -81,7 +81,7 @@ public class School {
                 Thread.currentThread().interrupt();
             }
             for(User user: users){
-                if(user.password().equals(password) && user.username().equals(username)){
+                if(user.getPassword().equals(password) && user.getUsername().equals(username)){
                     System.out.print("\rStatus: Access Granted!");
                     return user;
                 }
@@ -91,19 +91,65 @@ public class School {
     }
     public void run(){
         User CurrentUser = login();
-        switch(CurrentUser.role()){
+        switch(CurrentUser.getRole()){
             case ADMIN -> {
-                System.out.println("\nWelcome " + CurrentUser.username());
+                System.out.println("\nWelcome " + CurrentUser.getUsername());
                 adminMenu();
             }
             case STUDENT -> {
-                System.out.println("\nWelcome " + CurrentUser.username());
+                System.out.println("\nWelcome " + CurrentUser.getUsername());
                 studentMenu(CurrentUser);
             }
             case TEACHER -> {
-                System.out.println("\nWelcome " + CurrentUser.username());
+                System.out.println("\nWelcome " + CurrentUser.getUsername());
                 teacherMenu(CurrentUser);
             }
+        }
+    }
+
+    private void testData(){
+        Applicant applicant = new Applicant(1, "Ocquaye", "Smart",
+                "2007-02-05", ClassLevel.CLASS_1, "Aggrey Memorial SHS", //lemme give myself better gpa
+                4.5, LocalDate.now(), false, ApplicationStatus.PENDING);
+        applicants.add(applicant);
+
+        Classes year1 = new Classes("CSM158", ClassLevel.CLASS_1,
+                new ArrayList<>(), false, new ArrayList<>());
+        addClass(year1);
+
+        Course Cplusplus = new Course(3, null, "Introduction to C++", "CSM 158");
+        listOfCourses.add(Cplusplus);
+
+        TeachingStaff teacher = new TeachingStaff(1, "K.Owusu", "Agyeman",
+                "1972-21-08", "T001", 10000.00,
+                Role.TEACHER.name(), new ArrayList<>(), Department.SCIENCES);
+        addStaff(teacher);
+        listOfTeachingStaff.add(teacher);
+        createUserAccount(teacher, Role.TEACHER);
+    }
+
+    private void changePassword(User CurrentUser){
+        System.out.println("CHANGE YOUR PASSWORD");
+        System.out.print("Enter your current password: ");
+        String currentPassword = scanner.nextLine();
+        if(currentPassword.equals(CurrentUser.getPassword())){
+            System.out.print("Enter new password: ");
+            String newPassword = scanner.nextLine();
+            System.out.print("Enter password again: ");
+            String newPassword2 = scanner.nextLine();
+            if(!newPassword2.equals(newPassword)){
+                System.out.println("Passwords do not match");
+                return;
+            }
+            else{
+                CurrentUser.setPassword(newPassword2);
+                System.out.println("Password changed successfully");
+            }
+
+        }
+        else{
+            System.out.println("Incorrect password");
+            return;
         }
     }
 
@@ -117,6 +163,7 @@ KNUST TEACHING STAFF PORTAL
 1. View My Details
 2. View My Courses
 3. View Students In My Course
+4. Change Password
 0. Logout
 
                 """;
@@ -127,6 +174,7 @@ KNUST TEACHING STAFF PORTAL
                 case 1 -> viewTeacherDetails(currentUser);
                 case 2 -> viewMyCourses(currentUser);
                 case 3 -> viewStudentsInMyCourse(currentUser);
+                case 4 -> changePassword(currentUser);
                 case 0 -> {System.out.println("Logged out");
                     isRunning = false;
                     run();}
@@ -144,6 +192,7 @@ KNUST STUDENT PORTAL
 1. View My Details
 2. View Enrolled Courses
 3. View Class Information
+4. Change password
 0. Logout
 
                 """;
@@ -154,6 +203,7 @@ KNUST STUDENT PORTAL
                 case 1 -> viewMyDetails(currentUser);
                 case 2 -> viewMyEnrolledCourses(currentUser);
                 case 3 -> viewMyClass(currentUser);
+                case 4 -> changePassword(currentUser);
                 case 0 -> {System.out.println("Logged out");
                     isRunning = false;
                     run();}
@@ -588,7 +638,7 @@ KNUST ADMIN CENTER
 
     //STUDENT
     private void viewMyDetails(User user){
-        Student student = (Student) user.profile();
+        Student student = (Student) user.getProfile();
         System.out.println("Name: " + student.getFirstName() + " " + student.getLastName());
         System.out.println("Student ID: " + student.getStudentID());
         System.out.println("Date Of Birth: " + student.getDateOfBirth());
@@ -598,7 +648,7 @@ KNUST ADMIN CENTER
 
     private void viewMyEnrolledCourses(User user){
         int myNumber = 1;
-        Student student = (Student) user.profile();
+        Student student = (Student) user.getProfile();
         for(Course course: student.getEnrolledCourses()){
             System.out.println(myNumber + ". " + course.getCode() + " - " + course.getTitle() + " (" + course.getCreditUnits() + " credits)");
             myNumber++;
@@ -607,7 +657,7 @@ KNUST ADMIN CENTER
 
     private void viewMyClass(User user){
         int myNumber = 1;
-        Student student = (Student) user.profile();
+        Student student = (Student) user.getProfile();
         Classes currentClass = findCurrentClass(student);
 
         if(currentClass == null){
@@ -631,7 +681,7 @@ KNUST ADMIN CENTER
     }
     //TEACHER
     private void viewTeacherDetails(User user){
-        TeachingStaff teachingStaff = (TeachingStaff) user.profile();
+        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
         System.out.println("Name: " + teachingStaff.getFirstName() + " " + teachingStaff.getLastName());
         System.out.println("Staff ID: " + teachingStaff.getStaffId());
         System.out.println("Department: " + teachingStaff.getDepartment());
@@ -640,7 +690,7 @@ KNUST ADMIN CENTER
 
     private void viewMyCourses(User user){
         int myNumber = 1;
-        TeachingStaff teachingStaff = (TeachingStaff) user.profile();
+        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
         for(Course course: teachingStaff.getListOfCourses()){
             System.out.println(myNumber + ". " + course.getCode() + " - " + course.getTitle() + " (" + course.getCreditUnits() + " credits)");
             myNumber++;
@@ -649,7 +699,7 @@ KNUST ADMIN CENTER
 
     private void viewStudentsInMyCourse(User user){
         int myNumber = 1;
-        TeachingStaff teachingStaff = (TeachingStaff) user.profile();
+        TeachingStaff teachingStaff = (TeachingStaff) user.getProfile();
         for(Course course: teachingStaff.getListOfCourses()){
             for(Student student: course.getEnrolledStudents()){
                 System.out.println(myNumber + ". Full name: " + student.getFirstName() + " " + student.getLastName() + " ,ID: " + student.getId() + " ,Class level: "+ student.getClasslevel());
