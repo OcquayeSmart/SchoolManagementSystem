@@ -86,7 +86,7 @@ public class School {
                     return user;
                 }
             }
-            System.out.println("\nInvalid Credentials. Try again\n");
+            System.out.print("\nInvalid Credentials. Try again\n");
         }
     }
     public void run(){
@@ -108,28 +108,24 @@ public class School {
     }
 
     private void testData(){
-        Applicant applicant = new Applicant(1, "Ocquaye", "Smart",
-                "2007-02-05", ClassLevel.CLASS_1, "Aggrey Memorial SHS", //lemme give myself better gpa
-                4.5, LocalDate.now(), false, ApplicationStatus.PENDING);
+        Applicant applicant = new Applicant(1, "Smart", "Ocquaye", "2007-02-05", ClassLevel.CLASS_1, "Aggrey Memorial SHS", 4.5, LocalDate.now(), false, ApplicationStatus.PENDING);
         applicants.add(applicant);
 
-        Classes year1 = new Classes("CSM158", ClassLevel.CLASS_1,
-                new ArrayList<>(), false, new ArrayList<>());
+        Classes year1 = new Classes("CSM158", ClassLevel.CLASS_1, new ArrayList<>(), false, new ArrayList<>());
         addClass(year1);
 
         Course Cplusplus = new Course(3, null, "Introduction to C++", "CSM 158");
         listOfCourses.add(Cplusplus);
 
-        TeachingStaff teacher = new TeachingStaff(1, "K.Owusu", "Agyeman",
-                "1972-21-08", "T001", 10000.00,
-                Role.TEACHER.name(), new ArrayList<>(), Department.SCIENCES);
+        TeachingStaff teacher = new TeachingStaff(1, "K.Owusu", "Agyeman", "1972-08-21", "T001", 10000.00, Role.TEACHER.name(), new ArrayList<>(), Department.SCIENCES);
         addStaff(teacher);
         listOfTeachingStaff.add(teacher);
         createUserAccount(teacher, Role.TEACHER);
     }
 
     private void changePassword(User CurrentUser){
-        System.out.println("CHANGE YOUR PASSWORD");
+        System.out.println("CHANGE PASSWORD");
+        System.out.println();
         System.out.print("Enter your current password: ");
         String currentPassword = scanner.nextLine();
         if(currentPassword.equals(CurrentUser.getPassword())){
@@ -324,9 +320,9 @@ KNUST ADMIN CENTER
             return;
         }
 
-        System.out.println("\tFirst name \tLast name \tDate of birth \t Previous school \t Previous GPA \t Application status");
+        System.out.println("\tFirst name \tLast name \tDate of birth \t Previous school \t\t Previous GPA \t Application status");
         for(Applicant applicant:applicants){
-            System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t" + applicant.getPreviousSchool() + " \t" + applicant.getPreviousGPA() + " \t" + applicant.getApplicantStatus());
+            System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t\t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t\t " + applicant.getPreviousSchool() + "\t " + applicant.getPreviousGPA() + "\t\t\t " + applicant.getApplicantStatus());
             myNumber++;
         }
     }
@@ -351,14 +347,15 @@ KNUST ADMIN CENTER
 
         for(Applicant applicant:applicants){
             if (applicant.getFirstName().equalsIgnoreCase(firstName) && applicant.getLastName().equalsIgnoreCase(lastName)){
-                System.out.println("\rSearching for applicant");
+                System.out.print("\rSearching for applicant");
                 try{
                     Thread.sleep(900);
                 }
                 catch(InterruptedException e){
                     Thread.currentThread().interrupt();
                 }
-                System.out.println("\rApplicant found");
+                System.out.print("\rApplicant found");
+                System.out.println();
                 found = applicant;
                 break;
             }
@@ -372,12 +369,13 @@ KNUST ADMIN CENTER
         reviewApplication(found);
 
         if(found.getApplicantStatus() != ApplicationStatus.ACCEPTED){
-            System.out.println("Does not meet our requirements");
+            System.out.println(found.getFirstName() + " " +found.getLastName() +" does not meet the minimum requirements");
             applicants.remove(found);
             return;
         }
 
         viewAllClasses();
+        System.out.println();
         System.out.print("Student ClassID: ");
         String classID = scanner.nextLine();
 
@@ -398,7 +396,7 @@ KNUST ADMIN CENTER
         createUserAccount(newStudent, Role.STUDENT);
         applicants.remove(found);
 
-        System.out.println("Student accepted and enrolled successfully");
+        System.out.println(found.getFirstName() + found.getLastName() + " " + " accepted and enrolled successfully");
     }
 
     private void rejectApplicant(){
@@ -631,7 +629,7 @@ KNUST ADMIN CENTER
 
         System.out.println("\tClass ID \tClass Level \tClass size");
         for(Classes classes:listOfClasses){
-            System.out.println(myNumber + ". \t" + classes.getClassID() + " \t" + classes.getClassLevel() + " \t" + classes.size());
+            System.out.println(myNumber + ". \t" + classes.getClassID() + " \t\t" + classes.getClassLevel() + " \t\t\t" + classes.size());
             myNumber++;
         }
     }
@@ -714,7 +712,7 @@ KNUST ADMIN CENTER
         String defaultPassword = "pass123";
         User newUser = new User(randomString, defaultPassword, role, person);
         users.add(newUser);
-        System.out.println("Username: " + randomString + "\nPassword: " + defaultPassword);
+//        System.out.println("Username: " + randomString + "\nPassword: " + defaultPassword);
     }
 
     public void receiveApplication(Applicant applicant) {
