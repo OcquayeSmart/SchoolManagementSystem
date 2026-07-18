@@ -135,7 +135,6 @@ public class School {
             String newPassword2 = scanner.nextLine();
             if(!newPassword2.equals(newPassword)){
                 System.out.println("Passwords do not match");
-                return;
             }
             else{
                 CurrentUser.setPassword(newPassword2);
@@ -145,7 +144,6 @@ public class School {
         }
         else{
             System.out.println("Incorrect password");
-            return;
         }
     }
 
@@ -419,17 +417,18 @@ KNUST ADMIN CENTER
         Applicant found = null;
         for(Applicant applicant:applicants){
             if (applicant.getFirstName().equalsIgnoreCase(firstName) && applicant.getLastName().equalsIgnoreCase(lastName)){
-                System.out.println("\rSearching for applicant");
+                System.out.println();
+                System.out.print("\rSearching for applicant");
 
                 try{
-                    Thread.sleep(1500);
+                    Thread.sleep(900);
                 }
 
                 catch(InterruptedException e){
                     Thread.currentThread().interrupt();
                 }
 
-                System.out.println("\rApplicant found");
+                System.out.print("\rApplicant found");
                 found = applicant;
                 break;
             }
@@ -441,8 +440,8 @@ KNUST ADMIN CENTER
         found.setApplicantStatus(ApplicationStatus.REJECTED);
         rejectedApplicants.add(found);
         applicants.remove(found);
-
-        System.out.println("Student rejected successfully");
+        System.out.println();
+        System.out.println(found.getFirstName() + " " +found.getLastName() + " rejected successfully");
     }
 
     private void viewRejectedApplications(){
@@ -454,9 +453,9 @@ KNUST ADMIN CENTER
             System.out.println("No applicants rejected");
             return;
         }
-        System.out.println("\tFirst name \tLast name \tDate of birth \t Previous school \t Previous GPA \t Application status");
+        System.out.println("\tFirst name \tLast name \tDate of birth \t Previous school \t\t Previous GPA \t Application status");
         for(Applicant applicant:rejectedApplicants){
-            System.out.println(myNumber + ". \t" + applicant.getFirstName() + " \t" + applicant.getLastName() + " \t" + applicant.getDateOfBirth() + " \t" + applicant.getPreviousSchool() + " \t" + applicant.getPreviousGPA() + " \t" + applicant.getApplicantStatus());
+            System.out.println(myNumber + ". \t" + applicant.getFirstName() + "\t\t" + applicant.getLastName() + "\t\t" + applicant.getDateOfBirth() + "\t\t " + applicant.getPreviousSchool() + "\t " + applicant.getPreviousGPA() + "\t\t\t " + applicant.getApplicantStatus());
             myNumber++;
         }
     }
