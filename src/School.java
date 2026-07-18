@@ -28,7 +28,7 @@ public class School {
         this.listOfClasses = new ArrayList<>();
         this.listOfTeachingStaff = new ArrayList<>();
         this.listOfCourses = new ArrayList<>();
-        testData();
+//        testData();
     }
     //Using helper methods for checking edge cases
     //saves so much time lol
@@ -107,21 +107,21 @@ public class School {
         }
     }
 
-    private void testData(){
-        Applicant applicant = new Applicant(1, "Smart", "Ocquaye", "2007-02-05", ClassLevel.CLASS_1, "Aggrey Memorial SHS", 4.5, LocalDate.now(), false, ApplicationStatus.PENDING);
-        applicants.add(applicant);
-
-        Classes year1 = new Classes("CSM158", ClassLevel.CLASS_1, new ArrayList<>(), false, new ArrayList<>());
-        addClass(year1);
-
-        Course Cplusplus = new Course(3, null, "Introduction to C++", "CSM 158");
-        listOfCourses.add(Cplusplus);
-
-        TeachingStaff teacher = new TeachingStaff(1, "K.Owusu", "Agyeman", "1972-08-21", "T001", 10000.00, Role.TEACHER.name(), new ArrayList<>(), Department.SCIENCES);
-        addStaff(teacher);
-        listOfTeachingStaff.add(teacher);
-        createUserAccount(teacher, Role.TEACHER);
-    }
+//    private void testData(){
+//        Applicant applicant = new Applicant(1, "Smart", "Ocquaye", "2007-02-05", ClassLevel.CLASS_1, "Aggrey Memorial SHS", 4.5, LocalDate.now(), false, ApplicationStatus.PENDING);
+//        applicants.add(applicant);
+//
+//        Classes year1 = new Classes("CSM158", ClassLevel.CLASS_1, new ArrayList<>(), false, new ArrayList<>());
+//        addClass(year1);
+//
+//        Course Cplusplus = new Course(3, null, "Introduction to C++", "CSM 158");
+//        listOfCourses.add(Cplusplus);
+//
+//        TeachingStaff teacher = new TeachingStaff(1, "K.Owusu", "Agyeman", "1972-08-21", "T001", 10000.00, Role.TEACHER.name(), new ArrayList<>(), Department.SCIENCES);
+//        addStaff(teacher);
+//        listOfTeachingStaff.add(teacher);
+//        createUserAccount(teacher, Role.TEACHER);
+//    }
 
     private void changePassword(User CurrentUser){
         System.out.println("CHANGE PASSWORD");
