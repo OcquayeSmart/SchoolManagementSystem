@@ -1,16 +1,15 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserLogins {
-    private final List<User> Users;
+    private final List<User> users;
     private final Scanner scanner;
-    private InputValidation inputValidation;
+    private final InputValidation inputValidation;
 
-    public UserLogins() {
-        this.scanner = new Scanner(System.in);
-        Users = new ArrayList<>();
-        this.inputValidation = new InputValidation();
+    public UserLogins(Scanner scanner, List<User> users, InputValidation inputValidation) {
+        this.scanner = scanner;
+        this.users = users;
+        this.inputValidation = inputValidation;
     }
     public User login() {
         while(true){
@@ -26,7 +25,7 @@ public class UserLogins {
             catch(InterruptedException e){
                 Thread.currentThread().interrupt();
             }
-            for(User user: Users){
+            for(User user: users){
                 if(user.getPassword().equals(password) && user.getUsername().equals(username)){
                     System.out.print("\rStatus: Access Granted!");
                     return user;

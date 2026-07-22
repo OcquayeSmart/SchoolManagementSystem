@@ -2,11 +2,12 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class School {
-    private final Scanner scanner = new Scanner(System.in);
-    InputValidation inputValidation;
+    private final Scanner scanner;
+    private final InputValidation inputValidation;
+    private final List<User> users;
+    private final UserLogins userLogins;
     private final String name;
     private final String address;
-    private final List<User> users;
     private final List<Student> listOfStudents;
     private final List<Classes> listOfClasses;
     private final List<TeachingStaff> listOfTeachingStaff;
@@ -17,12 +18,14 @@ public class School {
     private final List<Applicant> rejectedApplicants;
 
     public School(String name, String address) {
-        this.inputValidation = new InputValidation();
+        this.scanner = new Scanner(System.in);
+        this.inputValidation = new InputValidation(scanner);
         this.listOfNonTeachingStaff = new ArrayList<>();
         this.rejectedApplicants = new ArrayList<>();
         this.applicants = new ArrayList<>();
         this.users = new ArrayList<>();
         users.add(new User("admin", "admin123", Role.ADMIN, null));
+        this.userLogins = new UserLogins(scanner, users, inputValidation);
         this.name = name;
         this.address = address;
         this.listOfStaff = new ArrayList<>();
@@ -32,31 +35,9 @@ public class School {
         this.listOfCourses = new ArrayList<>();
 //        testData();
     }
-    private User login() {
-        while(true){
-            System.out.println("Welcome back! Please enter your credentials.");
-            System.out.print("Username: ");
-            String username = scanner.nextLine();
-            System.out.print("Password: ");
-            String password = scanner.nextLine();
-            System.out.print("\n\rStatus: Verifying Credentials...");
-            try{
-                Thread.sleep(900);
-            }
-            catch(InterruptedException e){
-                Thread.currentThread().interrupt();
-            }
-            for(User user: users){
-                if(user.getPassword().equals(password) && user.getUsername().equals(username)){
-                    System.out.print("\rStatus: Access Granted!");
-                    return user;
-                }
-            }
-            System.out.print("\nInvalid Credentials. Try again\n");
-        }
-    }
+
     public void run(){
-        User CurrentUser = login();
+        User CurrentUser = userLogins.login();
         switch(CurrentUser.getRole()){
             case ADMIN -> {
                 System.out.println("\nWelcome " + CurrentUser.getUsername());
@@ -763,5 +744,8 @@ KNUST ADMIN CENTER
             classes.addCourse(course);
             assignTeacher(teacher, course);
         }
+    }
+    public List<User> getUsers() {
+        return users;
     }
 }
