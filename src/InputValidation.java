@@ -2,8 +2,8 @@ import java.util.Scanner;
 
 public class InputValidation {
     private final Scanner scanner;
-    InputValidation(Scanner scanner){
-        this.scanner = scanner;
+    InputValidation(){
+        this.scanner = new Scanner(System.in);
     }
     public int checkInt(){
         while(true){

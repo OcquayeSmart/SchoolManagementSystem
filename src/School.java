@@ -3,6 +3,7 @@ import java.util.*;
 
 public class School {
     private final Scanner scanner = new Scanner(System.in);
+    InputValidation inputValidation = new InputValidation();
     private final String name;
     private final String address;
     private final List<User> users;
@@ -30,42 +31,6 @@ public class School {
         this.listOfCourses = new ArrayList<>();
 //        testData();
     }
-    //Using helper methods for checking edge cases
-    //saves so much time lol
-    private int checkInt(){
-        while(true){
-            try{
-                return Integer.parseInt(scanner.nextLine().trim());
-            }
-            catch(NumberFormatException e){
-                System.out.print("Invalid Input, please try again: ");
-            }
-        }
-    }
-    private double checkDouble(){
-        while(true){
-            try{
-                return Double.parseDouble(scanner.nextLine().trim());
-            }
-            catch(NumberFormatException e){
-                System.out.print("Invalid Input, please try again: ");
-            }
-        }
-    }
-    private int checkRange(int min, int max){
-        while(true){
-            int value = checkInt();
-            if(value >= min && value <= max){
-                return value;
-            }
-            else{
-                System.out.println("Invalid input");
-                System.out.print("Please enter a number between " + min + " and " + max + ": ");
-            }
-        }
-    }
-
-
     private User login() {
         while(true){
             System.out.println("Welcome back! Please enter your credentials.");
@@ -147,7 +112,7 @@ KNUST TEACHING STAFF PORTAL
                 """;
         while(isRunning){
             System.out.println(TeacherMenu);
-            int userInput = checkInt();
+            int userInput = inputValidation.checkInt();
             switch(userInput){
                 case 1 -> viewTeacherDetails(currentUser);
                 case 2 -> viewMyCourses(currentUser);
@@ -176,7 +141,7 @@ KNUST STUDENT PORTAL
                 """;
         while(isRunning){
             System.out.println(studentMenu);
-            int userInput = checkInt();
+            int userInput = inputValidation.checkInt();
             switch(userInput){
                 case 1 -> viewMyDetails(currentUser);
                 case 2 -> viewMyEnrolledCourses(currentUser);
@@ -212,7 +177,7 @@ KNUST ADMIN CENTER
 """;
         while(isRunning){
             System.out.println(adminMenu);
-            int userChoice = checkInt();
+            int userChoice = inputValidation.checkInt();
             switch(userChoice){
                 case 1 -> registerApplicant();
                 case 2 -> viewAllApplicants();
@@ -277,7 +242,7 @@ KNUST ADMIN CENTER
             System.out.println(i + 1 + ". " + levels[i]);
         }
         System.out.print("Enter number: ");
-        int levelChoice = checkRange(1, levels.length);
+        int levelChoice = inputValidation.checkRange(1, levels.length);
         ClassLevel desiredLevel = levels[levelChoice - 1];
 
         int id = applicants.size() + 1;
@@ -474,7 +439,7 @@ KNUST ADMIN CENTER
         String dateOfBirth = scanner.nextLine();
 
         System.out.print("Teacher's Salary(GHS): ");
-        double salary = checkDouble();
+        double salary = inputValidation.checkDouble();
 
         System.out.println("Select desired department");
         Department[] departments = Department.values();
@@ -482,7 +447,7 @@ KNUST ADMIN CENTER
             System.out.println(i + 1 + ". " + departments[i]);
         }
         System.out.print("Enter preferred number: ");
-        int departmentChoice = checkRange(1, departments.length);
+        int departmentChoice = inputValidation.checkRange(1, departments.length);
         Department department = departments[departmentChoice - 1];
 
         int id = listOfTeachingStaff.size() + 1;
@@ -512,7 +477,7 @@ KNUST ADMIN CENTER
         String dateOfBirth = scanner.nextLine();
 
         System.out.print("Salary(GHS): ");
-        double salary = checkDouble();
+        double salary = inputValidation.checkDouble();
 
         System.out.print("Job title: ");
         String jobTitle = scanner.nextLine();
@@ -559,7 +524,7 @@ KNUST ADMIN CENTER
         String courseTitle = scanner.nextLine();
 
         System.out.print("Credit Units(hr): ");
-        int creditUnits = checkInt();
+        int creditUnits = inputValidation.checkInt();
 
         Course course = new Course(creditUnits, null, courseTitle, courseCode);
         listOfCourses.add(course);
@@ -590,7 +555,7 @@ KNUST ADMIN CENTER
         }
 
         System.out.println("Select desired class(1-" + classLevel.length + ")");
-        int classLevelChoice = checkRange(1, classLevel.length);
+        int classLevelChoice = inputValidation.checkRange(1, classLevel.length);
         ClassLevel level = classLevel[classLevelChoice - 1];
 
         System.out.print("Class ID: ");
