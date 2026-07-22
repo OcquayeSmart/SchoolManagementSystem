@@ -3,7 +3,7 @@ import java.util.*;
 
 public class School {
     private final Scanner scanner = new Scanner(System.in);
-    InputValidation inputValidation = new InputValidation();
+    InputValidation inputValidation;
     private final String name;
     private final String address;
     private final List<User> users;
@@ -17,6 +17,7 @@ public class School {
     private final List<Applicant> rejectedApplicants;
 
     public School(String name, String address) {
+        this.inputValidation = new InputValidation();
         this.listOfNonTeachingStaff = new ArrayList<>();
         this.rejectedApplicants = new ArrayList<>();
         this.applicants = new ArrayList<>();
