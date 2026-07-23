@@ -51,65 +51,11 @@ public class School {
             }
             case STUDENT -> {
                 System.out.println("\nWelcome " + CurrentUser.getUsername());
-                studentMenu(CurrentUser);
+                studentMenu.show(users);
             }
             case TEACHER -> {
                 System.out.println("\nWelcome " + CurrentUser.getUsername());
-                teacherMenu(CurrentUser);
-            }
-        }
-    }
-
-    private void changePassword(User CurrentUser){
-        System.out.println("CHANGE PASSWORD");
-        System.out.println();
-        System.out.print("Enter your current password: ");
-        String currentPassword = scanner.nextLine();
-        if(currentPassword.equals(CurrentUser.getPassword())){
-            System.out.print("Enter new password: ");
-            String newPassword = scanner.nextLine();
-            System.out.print("Enter password again: ");
-            String newPassword2 = scanner.nextLine();
-            if(!newPassword2.equals(newPassword)){
-                System.out.println("Passwords do not match");
-            }
-            else{
-                CurrentUser.setPassword(newPassword2);
-                System.out.println("Password changed successfully");
-            }
-
-        }
-        else{
-            System.out.println("Incorrect password");
-        }
-    }
-
-    private void teacherMenu(User currentUser) {
-        boolean isRunning = true;
-        String TeacherMenu = """
-
-
-KNUST TEACHING STAFF PORTAL
-
-1. View My Details
-2. View My Courses
-3. View Students In My Course
-4. Change Password
-0. Logout
-
-                """;
-        while(isRunning){
-            System.out.println(TeacherMenu);
-            int userInput = inputValidation.checkInt();
-            switch(userInput){
-                case 1 -> viewTeacherDetails(currentUser);
-                case 2 -> viewMyCourses(currentUser);
-                case 3 -> viewStudentsInMyCourse(currentUser);
-                case 4 -> changePassword(currentUser);
-                case 0 -> {System.out.println("Logged out");
-                    isRunning = false;
-                    run();}
-                default -> System.out.println("Invalid choice. Please try again");
+                teacherMenu.show(users);
             }
         }
     }

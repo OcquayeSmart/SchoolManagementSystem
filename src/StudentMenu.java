@@ -10,7 +10,7 @@ public class StudentMenu {
         this.scanner = scanner;
         this.inputValidation = inputValidation;
     }
-    public void show(){
+    public void show(User currentUser){
         boolean isRunning = true;
         String studentMenu = """
 
@@ -33,7 +33,7 @@ KNUST STUDENT PORTAL
                 case 4 -> changePassword(currentUser);
                 case 0 -> {System.out.println("Logged out");
                     isRunning = false;
-                    run();}
+                    school.run();}
                 default -> System.out.println("Invalid choice. Please try again");
             }
         }
@@ -59,7 +59,7 @@ KNUST STUDENT PORTAL
     private void viewMyClass(User user){
         int myNumber = 1;
         Student student = (Student) user.getProfile();
-        Classes currentClass = findCurrentClass(student);
+        Classes currentClass = school.findCurrentClass(student);
 
         if(currentClass == null){
             System.out.println("Dear Student");
@@ -78,6 +78,29 @@ KNUST STUDENT PORTAL
                 System.out.println(myNumber + ". " +course.getCode() + " " + course.getTitle());
                 myNumber++;
             }
+        }
+    }
+    private void changePassword(User CurrentUser){
+        System.out.println("CHANGE PASSWORD");
+        System.out.println();
+        System.out.print("Enter your current password: ");
+        String currentPassword = scanner.nextLine();
+        if(currentPassword.equals(CurrentUser.getPassword())){
+            System.out.print("Enter new password: ");
+            String newPassword = scanner.nextLine();
+            System.out.print("Enter password again: ");
+            String newPassword2 = scanner.nextLine();
+            if(!newPassword2.equals(newPassword)){
+                System.out.println("Passwords do not match");
+            }
+            else{
+                CurrentUser.setPassword(newPassword2);
+                System.out.println("Password changed successfully");
+            }
+
+        }
+        else{
+            System.out.println("Incorrect password");
         }
     }
 }
