@@ -51,11 +51,11 @@ public class School {
             }
             case STUDENT -> {
                 System.out.println("\nWelcome " + CurrentUser.getUsername());
-                studentMenu.show(users);
+                studentMenu.show(CurrentUser);
             }
             case TEACHER -> {
                 System.out.println("\nWelcome " + CurrentUser.getUsername());
-                teacherMenu.show(users);
+                teacherMenu.show(CurrentUser);
             }
         }
     }
