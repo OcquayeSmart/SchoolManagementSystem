@@ -67,7 +67,7 @@ public class School {
         String defaultPassword = "pass123";
         User newUser = new User(randomString, defaultPassword, role, person);
         users.add(newUser);
-//        System.out.println("Username: " + randomString + "\nPassword: " + defaultPassword);
+        System.out.println("Username: " + randomString + "\nPassword: " + defaultPassword);
     }
 
     public void receiveApplication(Applicant applicant) {
@@ -203,5 +203,13 @@ public class School {
 
     public List<Staff> getListOfStaff() {
         return listOfStaff;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
     }
 }
