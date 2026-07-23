@@ -418,7 +418,7 @@ KNUST ADMIN CENTER
         String classID = scanner.nextLine();
 
         Classes classes = new Classes(classID, level, new ArrayList<>(), false, new ArrayList<>());
-        addClass();
+        school.addClass(classes);
         System.out.println("Class added successfully");
     }
     private void viewAllClasses(){
