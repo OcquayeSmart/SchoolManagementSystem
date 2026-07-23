@@ -19,7 +19,7 @@
 
 Schools in Ghana still manage student records, staff data and admissions on paper. This project is a step toward in changing that.
 
-The School Management System is designed to digitise these operations through a clean console interface. An admin can register applicants, review their applications, enrol accepted students into classes and manage teaching and non-teaching staff. Students and teachers also have their own secure portal.
+The School Management System is designed to digitize these operations through a clean console interface. An admin can register applicants, review their applications, enrol accepted students into classes and manage teaching and non-teaching staff. Students and teachers also have their own secure portal.
 
 This is version 1. The roadmap leads to a full web based system with a database, REST API and a frontend any school administrator could use without technical knowledge.
 
