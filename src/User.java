@@ -1,8 +1,8 @@
 import java.util.Objects;
 
 public final class User {
-    private final String username;
-    private final String password;
+    private String username;
+    private String password;
     private final Role role;
     private final Object profile;
 
@@ -17,7 +17,7 @@ public final class User {
         return username;
     }
     public String setUsername(String username){
-        return this.username;
+        return this.username = username;
     }
 
     public String getPassword() {
@@ -25,7 +25,7 @@ public final class User {
     }
 
     public String setPassword(String password){
-        return this.password;
+        return this.password = password;
     }
     public Object getProfile(){
         return profile;
