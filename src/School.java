@@ -120,6 +120,9 @@ public class School {
 
     public void assignTeacher(TeachingStaff teacher, Course course){
         course.setTeacher(teacher);
+        if(!teacher.getListOfCourses().contains(course)){
+            teacher.getListOfCourses().add(course);
+        }
     }
 
     public void addClass(Classes classes){

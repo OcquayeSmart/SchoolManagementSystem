@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Classes{
     private final String classID;
@@ -48,5 +49,16 @@ public class Classes{
 
     public List<Course> getCourses() {
         return courses;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Classes classes)) return false;
+        return Objects.equals(classID, classes.classID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(classID);
     }
 }
