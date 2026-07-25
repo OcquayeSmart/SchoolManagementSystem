@@ -177,6 +177,11 @@ public class School {
             assignTeacher(teacher, course);
         }
     }
+    public void enrollStudentInCourse(Student student, Course course){
+        student.enrollInCourse(course);
+        course.getEnrolledStudents().add(student);
+    }
+
     public List<User> getUsers() {
         return users;
     }
