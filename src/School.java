@@ -133,7 +133,12 @@ public class School {
     }
 
     public Classes findCurrentClass(Student student){
-        return findClassByLevel(student.getClasslevel());
+        for(Classes classes : listOfClasses){
+            if(classes.getListOfStudents().contains(student)){
+                return classes;
+            }
+        }
+        return null;
     }
 
     public void promoteStudent(Student student){

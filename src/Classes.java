@@ -32,6 +32,10 @@ public class Classes{
         }
     }
 
+    public List<Student> getListOfStudents() {
+        return listOfStudents;
+    }
+
     public int size(){
         return listOfStudents.size();
     }
